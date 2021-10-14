@@ -1,0 +1,16 @@
+var express = require('express')
+var app = express()
+var router = express.Router()
+const reportController = require('../../controllers/api/ReportController')
+const verifyToken = require('../../Middlewares/JwtAuthMiddleware')
+//======== Tổng thành viên trong hệ thống
+router.get('/totalProduct', reportController.totalProduct)
+router.get('/totalListUser', reportController.totalListUser)
+router.get('/totalOrder', reportController.totalOrder)
+router.get('/totalDaily', reportController.totalDaily)
+router.get('/totalCommission', reportController.totalCommission)
+router.get('/totalCommissionPay', reportController.totalCommissionPay)
+router.get('/totalSale', reportController.totalSale)
+router.get('/arrTotalMoneyMonthInYear', reportController.arrTotalMoneyMonthInYear)
+router.get('/arrTotalOrderMonthInYear', reportController.arrTotalOrderMonthInYear)
+module.exports = router

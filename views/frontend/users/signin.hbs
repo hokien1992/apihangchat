@@ -1,0 +1,72 @@
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Đăng nhập</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-4 col-sm-offset-4">
+              <div class="content_form_login clearfix">
+                <div class="text-center">
+                    <h2>{{ title }}</h2>
+                </div>
+                {{# if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{# each messages }}
+                        {{this}} <br>
+                        {{/each}}
+                    </div>
+                {{/if}}
+                {{#if_eq message_register.status 1}}
+                <div class="alert alert-success">
+                    Bạn tạo thành công tài khoản. Bạn vui lòng check email để kích hoạt tài khoản !
+                </div>
+                {{/if_eq}}
+                <form action="/users/signin" method="post">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <div class="form-group">
+                        <label for="Email">Email đăng nhập</label>
+                        <input type="text" name="email" class="form-control" placeholder="E-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                    </div>
+                    <div class="form-group">
+                      <a href="/users/check-mail" title="Quên mật khẩu" style="color: #888888;font-size: 10px">Quên mật khẩu ?</a>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-sn btn-success">Đăng nhập</button>
+                    </div>
+                    <div class="h15"></div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <a href="/users/auth/facebook" class="btn-sm btn-primary">
+                          <i class="fa fa-facebook" aria-hidden="true"></i> Đăng nhập facebook
+                        </a>
+                      </div>
+                      <div class="col-sm-6" style="text-align: right;">
+                        <a href="javascript:void(0)" class="btn-sm btn-danger">
+                          <i class="fa fa-google-plus-official" aria-hidden="true"></i> Đăng nhập Gmail
+                        </a>
+                      </div>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>
+{{#contentFor 'pageScripts'}}
+<input type="text" name="urlRoot" id="urlRoot" value="{{urlRoot}}">
+<script src="template/js/myJs/users/users.js"></script>
+{{/contentFor}}

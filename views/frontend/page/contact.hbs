@@ -1,0 +1,60 @@
+<!-- MAIN -->
+		<main class="site-main">
+
+            <div class="columns container">
+                <!-- Block  Breadcrumb-->
+                        
+                <ol class="breadcrumb no-hide">
+                    <li><a href="/" title="{{settings.name}}">Trang chủ</a></li>
+                    <li class="active">{{itemproduct.name}}</li>
+                </ol><!-- Block  Breadcrumb-->
+
+                <h2 class="page-heading">
+                    <span class="page-heading-title2">{{itemproduct.name}}</span>
+                </h2>
+
+                <div class="page-content" id="contact">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="contact-form-box">
+                                <div class="form-selector">
+                                    <label>Subject Heading</label>
+                                    <select id="subject" class="form-control input-sm">
+                                        <option value="Customer service">Customer service</option>
+                                        <option value="Webmaster">Webmaster</option>
+                                    </select>
+                                </div>
+                                <div class="form-selector">
+                                    <label>Email address</label>
+                                    <input type="text" id="email" class="form-control input-sm">
+                                </div>
+                                <div class="form-selector">
+                                    <label>Order reference</label>
+                                    <input type="text" id="order_reference" class="form-control input-sm">
+                                </div>
+                                <div class="form-selector">
+                                    <label>Ghi chú</label>
+                                    <textarea id="note" rows="10" class="form-control input-sm"></textarea>
+                                </div>
+                                <div class="form-selector">
+                                    <button type="submit" class="btn" id="btn-send-contact">Gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="contact_form_map" class="col-xs-12 col-sm-6">
+                            <h3 class="page-subheading">Thông tin công ty</h3>
+                            <p></p>
+                            <br>
+                            <ul class="store_info">
+                                <li><i class="fa fa-home"></i>{{settings.address}}</li>
+                                <li><i class="fa fa-phone"></i><span>{{settings.phone}}</span></li>
+                                <li><i class="fa fa-phone"></i><span>{{settings.hotline}}</span></li>
+                                <li><i class="fa fa-envelope"></i>Email: <span><a href="mailto:{{settings.email}}">{{settings.email}}</a></span></li>
+                            </ul>                
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+		</main><!-- end MAIN -->

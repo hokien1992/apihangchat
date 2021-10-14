@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cc75a60d-fc94-43ac-a775-a0249c08576d" name="vnmall.com.vn" url="http://123.31.12.64">
+        <fileTransfer host="123.31.12.64" port="21" rootFolder="/public_html/vnmall">
+          <advancedOptions>
+            <advancedOptions compatibilityMode="true" dataProtectionLevel="Private" forceListCommand="true" passiveMode="true" shareSSLContext="true" showHiddenFiles="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="df5304b9-9e81-4bf4-9150-3494a0719a4d" name="akie" url="http://163.44.206.217">
+        <fileTransfer host="163.44.206.217" port="22" rootFolder="/var/www/akie.com.vn/html/akie2305201912" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="225f6dd2-1c74-475b-9b70-fc1128b9aee8" name="vietnamepay" url="http://123.31.12.64">
+        <fileTransfer host="123.31.12.64" port="21" rootFolder="/public_html/epay">
+          <advancedOptions>
+            <advancedOptions compatibilityMode="true" dataProtectionLevel="Private" forceListCommand="true" passiveMode="true" shareSSLContext="true" showHiddenFiles="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

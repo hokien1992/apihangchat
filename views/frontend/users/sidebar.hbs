@@ -1,0 +1,145 @@
+<div class="col-sm-3">
+  <div class="box_user_left clearfix">
+    <div class="content_box_img clearfix">
+        <div class="box_img clearfix">
+            <a href="/users/dashboard" title="{{dataUser.name}}">
+                {{#if_eq dataUser.imagePath ''}}
+                <img src="/user/user.png" alt="{{dataUser.name}}">
+                {{else}}
+                <img src="{{dataUser.imagePath}}" alt="{{dataUser.name}}">
+                {{/if_eq}}
+            </a>
+            <h3><strong>{{dataUser.name}}</strong></h3>
+        </div>
+    </div>
+    <div class="info_users clearfix">
+      <div class="level_users clearfix">
+        <span><strong>Email: </strong></span><span>{{dataUser.email}}</span>
+      </div>
+      <div class="level_users clearfix">
+        <span><strong>Điện thoại: </strong></span><span>{{dataUser.phone}}</span>
+      </div>
+      <div class="level_users clearfix">
+        <span><strong>Ví tiêu dùng: </strong></span>
+        {{#if_eq dataUser.wallet_id.w_epay 0}}
+        <span class="red">{{dataUser.wallet_id.w_epay}} EPAY</span>
+        {{else}}
+        <span class="red">{{formatNumber dataUser.wallet_id.w_epay}} EPAY</span>
+        {{/if_eq}}
+
+      </div>
+      <div class="level_users clearfix">
+          <span><strong>Ví tiết kiệm: </strong></span>
+          {{#if_eq dataUser.wallet_id.w_epay 0}}
+          <span class="red">{{dataUser.wallet_id2.w_epay}} EPAY</span>
+          {{else}}
+          <span class="red">{{formatNumber dataUser.wallet_id2.w_epay}} EPAY</span>
+          {{/if_eq}}
+      </div>
+      <div class="level_users clearfix">
+          <span><strong>Ví epay.fan: </strong></span>
+          {{#if_eq dataUser.wallet_id.w_epay 0}}
+          <span class="red">{{dataUser.wallet_id3.w_epay}} EPAY</span>
+          {{else}}
+          <span class="red">{{formatNumber dataUser.wallet_id3.w_epay}} EPAY</span>
+          {{/if_eq}}
+      </div>
+      {{#if_eq dataUser.check_update_wallet 0}}
+      <div class="level_users clearfix" style="text-align: center;margin-top: 15px;">
+        <form action="/users/updateEpayUser" method="post">
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+          <button type="submit" class="btn-sm btn-success">Xác nhận để nhận điểm mỗi ngày</button>
+        </form>
+      </div>
+      {{/if_eq}}
+    </div>
+  </div>
+  <div class="h15"></div>
+  <div class="box_user_left_all clearfix">
+    <div class="title_box_user_left_all clearfix">
+      <h4><i class="fa fa-list" aria-hidden="true"></i>
+        <a href="javascript:void(0)">Mục quản lý</a>
+        <a href="javascript:void(0)" style="float: right; color: #ffffff;">
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+      </h4>
+    </div>
+    <div class="box_user_option clearfix">
+      <ul>
+        <li>
+          <a href="javascript:void(0)">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            Thông báo <span style="display: inline-block;width: 20px;height: 20px;background: #ff0000;color: #ffffff;border-radius: 20px;text-align: center;align-items: center;float: right;line-height: 20px;font-size: 10px">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="/users/profile">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Tài khoản của tôi
+          </a>
+        </li>
+        <li>
+          <a href="/users/listUsers">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            Danh sách thành viên
+          </a>
+        </li>
+        <li>
+          <a href="/users/product">
+            <i class="fa fa-product-hunt" aria-hidden="true"></i>
+            Sản phẩm của tôi
+          </a>
+        </li>
+        <li>
+          <a href="/users/exchange">
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            Giao dịch chuyển đổi
+          </a>
+        </li>
+        <li>
+          <a href="/users/exchange/historyExchange">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            Lịch sử giao dịch
+          </a>
+        </li>
+        <li>
+          <a href="/users/affiliate-tracking" title="affiliate tracking">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            Affiliate Tracking
+          </a>
+        </li>
+        <li>
+          <a href="/users/banner-affiliate">
+            <i class="fa fa-picture-o" aria-hidden="true"></i>
+            Affiliate Banner
+          </a>
+        </li>
+        <!-- <li>
+          <a href="/users/signup?affRes={{dataUser.tracking}}" target="_blank">
+            <i class="fa fa-link" aria-hidden="true"></i>
+            Link Affiliate
+          </a>
+        </li> -->
+        <li>
+          <a href="/users/history-order">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            Lịch sử đơn hàng
+          </a>
+        </li>
+        <li>
+          <a href="/users/viewChangePassword">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            Đổi mật khẩu
+          </a>
+        </li>
+        <li>
+          <a href="/users/logout">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            Đăng xuất
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="h15"></div>
+</div>

@@ -1,0 +1,30 @@
+h2.h2_box_info_total_cart{
+    margin: 0px;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #cccccc;
+    padding: 8px 15px;
+    font-weight: 700;
+}
+.main_infi_total_cart{
+    background: #ffffff;
+    box-shadow: 0px 0px 1px #cccccc;
+}
+.box_info_total_cart{
+    padding: 10px;
+}
+.item_box_info_total_cart_{color: #888888;}
+.box_table_cart{box-shadow: 0px 0px 1px #cccccc}
+.box_form_checkout{background: #ffffff;box-shadow: 0px 0px 1px #cccccc;}
+.info_form_cart_customer{padding: 10px 0px;}
+.info_form_cart_customer label{color: #777777}
+.red{color: #ff0000}
+
+.box_detail_type_payment{
+  display: block;
+  background: #ffffff;
+  border: 1px solid #f6f6f6;
+  padding: 15px;
+}
+.type_payment_content{display: none;}
+.type_payment_content0{display: block;}

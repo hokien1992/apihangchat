@@ -1,0 +1,17 @@
+var express = require('express')
+var app = express()
+var router = express.Router()
+const catnewController = require('../../controllers/api/CatnewController')
+const verifyToken = require('../../Middlewares/JwtAuthMiddleware')
+//========End fix upload image
+router.get('/limitCatnew', verifyToken, catnewController.limitCatnew)
+router.get('/list', verifyToken, catnewController.list)
+router.get('/getAll', catnewController.getAll)
+router.get('/show/:id', catnewController.show)
+router.post('/store', catnewController.store)
+router.post('/update/:id', catnewController.update)
+router.post('/remove', catnewController.remove)
+router.get('/getDataUrl', catnewController.getDataUrl)
+router.post('/checkHome', catnewController.checkHome)
+router.post('/checkFocus', catnewController.checkFocus)
+module.exports = router

@@ -1,0 +1,188 @@
+
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+
+{{/contentFor}}
+{{#contentFor 'pageScripts'}}
+<script type="text/javascript">
+function showRemoveBanner(id){
+  $('#idUser').val(id)
+ $('#removeBanner').modal('show')
+}
+</script>
+
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Chi tiết giao dịch</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Chi tiết giao dịch</a>
+              </h4>
+            </div>
+            <div class="box_user_right clearfix">
+              <div class="">
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Mã giao dịch: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                      <strong style="color: #888888">{{itemExchange.code}}</strong>
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Hình thức thanh toán: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    {{#if_eq itemExchange.hinhthucthanhtoan 0}}
+                      <span style="color: #888888">Tiền mặt</span>
+                    {{/if_eq}}
+                    {{#if_eq itemExchange.hinhthucthanhtoan 1}}
+                      <span style="color: #888888">Chuyển khoản</span>
+                    {{/if_eq}}
+                    {{#if_eq itemExchange.hinhthucthanhtoan 2}}
+                      <span style="color: #888888">Thanh toán qua ví tiêu dùng</span>
+                    {{/if_eq}}
+                    {{#if_eq itemExchange.hinhthucthanhtoan 3}}
+                      <span style="color: #888888">Thanh toán qua trang epay.fan</span>
+                    {{/if_eq}}
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Thời gian GD: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                      <span style="color: #888888">
+                        {{showformatDatime itemExchange.update_at}}
+                      </span>
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Trạng thái: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    {{#if_eq itemExchange.status 0}}
+                      <span style="color: #888888">Đang chờ duyệt</span>
+                      {{else}}
+                      <span style="color: #888888">Đã xác nhận</span>
+                      {{/if_eq}}
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Loại GD: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                      <strong style="color: #888888">{{itemExchange.code}}</strong>
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Số tiền nạp: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    {{#if_eq itemExchange.number_monney 0}}
+                      <strong class="red">{{itemExchange.number_monney}} VNĐ</strong>
+                    {{else}}
+                      <strong class="red">{{formatNumber itemExchange.number_monney}} VNĐ</strong>
+                    {{/if_eq}}
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Ví tiêu dùng: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    {{#if_eq itemExchange.w_epay 0}}
+                      {{itemExchange.w_epay_prefix}}
+                      <strong class="red">{{itemExchange.w_epay}} Epay</strong>
+                    {{else}}
+                      {{itemExchange.w_epay_prefix}}
+                      <strong class="red">{{formatNumber itemExchange.w_epay}} Epay</strong>
+                    {{/if_eq}}
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Ví tiết kiệm: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    {{#if_eq itemExchange.w_epay2 0}}
+                      {{itemExchange.w_epay2_prefix}}
+                      <strong class="red">{{itemExchange.w_epay2}} Epay</strong>
+                    {{else}}
+                      {{itemExchange.w_epay2_prefix}}
+                      <strong class="red">{{formatNumber itemExchange.w_epay2}} Epay</strong>
+                    {{/if_eq}}
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Ví Epay: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    {{#if_eq itemExchange.w_epay3 0}}
+                      {{itemExchange.w_epay3_prefix}}
+                      <strong class="red">{{itemExchange.w_epay3}} Epay</strong>
+                    {{else}}
+                      {{itemExchange.w_epay3_prefix}}
+                      <strong class="red">{{formatNumber itemExchange.w_epay3}} Epay</strong>
+                    {{/if_eq}}
+                  </div>
+                </div>
+                <div class="h15"></div>
+                <div class="form-group">
+                  <div class="col-sm-3">
+                    <label for="">
+                      <strong style="color: #888888">Ghi chú: </strong>
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                      <span style="color: #888888">{{{itemExchange.content}}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

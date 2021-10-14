@@ -1,0 +1,87 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+    Dashboard
+    <small>Thêm tài khoản</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Thêm tài khoản</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+    <div class="">
+        <div class="box">
+            <form action="/admin/update/{{ results._id }}" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="box-header">
+                    <h3 class="box-title">Thêm tài khoản</h3>
+                    <button type="submit" class="btn btn-sm btn-success" style="float:right"><i class="fa fa-plus"></i> Cập nhật</button>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Tên</label>
+                            <input type="text" name="name" class="form-control" value="{{ results.name }}" placeholder="Tên" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">E-mail</label>
+                            <input type="text" name="email" class="form-control" value="{{ results.email }}" placeholder="E-mail" required>
+                            {{# if messenger.exitsEmail }}
+                                <span class="red">{{ messenger.exitsEmail }}</span>
+                            {{/if}}
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Điện thoại</label>
+                            <input type="text" name="phone" class="form-control" value="{{ results.phone }}" placeholder="Điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label for="zalo">Zalo</label>
+                            <input type="text" name="zalo" class="form-control" value="{{ results.zalo }}" placeholder="Zalo">
+                        </div>
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" name="facebook" class="form-control" value="{{ results.facebook }}" placeholder="Facebook">
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="text" name="website" class="form-control" value="{{ results.website }}" placeholder="Website">
+                        </div>
+                        <div class="form-group">
+                            <label for="gplus">Google+</label>
+                            <input type="text" name="gplus" class="form-control" value="{{ results.gplus }}" placeholder="Google+">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" name="address" class="form-control" value="{{ results.address }}" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="image">Ảnh đại diện</label>
+                            <input type="file" name="image" id="image" placeholder="Ảnh đại diện">
+                            <p class="help-block">Upload ảnh với tỷ lệ 1:1</p>
+                            </div>
+                            <div class="checkbox">
+                            <label>
+                                {{# if results.active }}
+                                <input type="checkbox" name="active" value="{{ results.active }}"> Kích hoạt
+                                {{ else }}
+                                <input type="checkbox" name="active" value="{{ results.active }}" checked> Kích hoạt
+                                {{/if}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </form>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

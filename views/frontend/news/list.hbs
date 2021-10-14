@@ -1,0 +1,142 @@
+<!-- MAIN -->
+		<main class="site-main">
+
+            <div class="columns container">
+                <!-- Block  Breadcrumb-->
+                        
+                <ol class="breadcrumb no-hide">
+                    <li><a href="/">Trang chủ</a></li>
+                    {{#each htmlBreakcrum}}
+                    <li><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></li>
+                    {{/each}}
+                    <li class="active">{{itemCatnew.name}}</li>
+                </ol><!-- Block  Breadcrumb-->
+
+                <div class="row">
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-md-push-3  col-main ">
+                        <h2 class="page-heading">
+                            <span class="page-heading-title2">{{itemCatnew.name}}</span>
+                        </h2>
+                        <ul class="blog-posts">
+                            {{#each listnew}}
+                            <li class="post-item">
+                                <article class="entry">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="entry-thumb image-hover2">
+                                                <a href="{{this.slug}}" title="{{this.name}}">
+                                                    <img src="{{this.imagePath}}" alt="{{this.name}}">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="entry-ci">
+                                                <h3 class="entry-title"><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></h3>
+                                                <div class="entry-meta-data">
+                                                    <span class="author">
+                                                    <i class="fa fa-user"></i> 
+                                                    by: <a href="#">Admin</a></span>
+                                                    <span class="cat">
+                                                        <i class="fa fa-folder-o"></i>
+                                                        <a href="#">News, </a>
+                                                        <a href="#">Promotions</a>
+                                                    </span>
+                                                    <span class="comment-count">
+                                                        <i class="fa fa-comment-o"></i> 3
+                                                    </span>
+                                                    <span class="date"><i class="fa fa-calendar"></i> 2014-08-05 07:01:49</span>
+                                                </div>
+                                                <div class="post-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <span>(7 votes)</span>
+                                                </div>
+                                                <div class="entry-excerpt">
+                                                    {{{this.description}}}
+                                                </div>
+                                                <div class="entry-more">
+                                                    <a href="{{this.slug}}" title="{{this.name}}">Chi tiết</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        <div class="sortPagiBar clearfix">
+                            <div class="bottom-pagination">
+                                <nav>
+                                  <ul class="pagination">
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li>
+                                      <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">Next &raquo;</span>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div><!-- Main Content -->
+                    
+                    <!-- Sidebar -->
+                    <div class=" col-md-3 col-md-pull-9   col-sidebar">
+
+                        <!-- Block  categorie-->
+                        <div class="block-sidebar block-sidebar-categorie">
+                            <div class="block-title">
+                                <strong>Danh mục tin</strong>
+                            </div>
+                            <div class="block-content">
+                                <ul class="items">
+                                    {{#if dataCatNewsFocus}}
+                                    {{#each dataCatNewsFocus}}
+                                    <li class="parent">
+                                        <a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a>
+                                    </li>
+                                    {{/each}}
+                                    {{/if}}
+                                </ul>
+                            </div>
+                        </div><!-- Block  categorie-->
+
+                         <!-- Block  Popular Posts-->
+                        <div class="block-sidebar block-PopularPosts">
+                            <div class="block-title">
+                                <strong>Bài viết mới nhất</strong>
+                            </div>
+                            <div class="block-content">
+                                <ul class="blog-list-sidebar clearfix">
+                                    {{#if dataNewsFocus}}
+                                    {{#each dataNewsFocus}}
+                                    <li>
+                                        <div class="post-thumb">
+                                            <a href="{{this.slug}}" title="{{this.name}}"><img alt="{{this.name}}" src="{{this.imagePath}}"></a>
+                                        </div>
+                                        <div class="post-info">
+                                            <h5 class="entry_title"><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></h5>
+                                            <div class="post-meta">
+                                                <span class="date"><i class="fa fa-calendar"></i> 2014-08-05</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {{/each}}
+                                    {{/if}}
+                                </ul>
+                            </div>
+                        </div><!-- Block  Popular Posts-->
+                    </div><!-- Sidebar -->
+                </div>
+            </div>
+
+
+		</main><!-- end MAIN -->

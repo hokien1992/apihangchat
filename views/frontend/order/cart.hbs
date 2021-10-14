@@ -1,0 +1,212 @@
+<main class="site-main">
+
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.name}}">Trang chủ</a></li>
+            <li><a href="/gio-hang" title="Giỏ hàng">Giỏ hàng</a></li>
+        </ol><!-- Block  Breadcrumb-->
+        <input type="hidden" id="tokens_cart" class="form-control" value="{{ csrfToken }}">
+        <div class="row">
+        {{#if session.cart}}
+            <div class="col-sm-9">
+                <div class="box_table_cart clearfix">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            {{#if carts.items}}
+                            <tbody>
+                              {{#each carts.items}}
+                              <tr>
+                                  <td style="width:80px;text-align:center">
+                                      <img style="width:68px;height:68px" src="{{this.item.imagePath}}">
+                                  </td>
+                                  <td>
+                                      <a href="{{this.item.slug}}"><strong>{{this.item.name}}</strong></a>
+                                      <div class="clearfix"></div>
+                                      <span style="color: #888888">
+                                        Mã sản phẩm: {{this.item.code}}
+                                      </span>
+                                      {{#each this.dataOptionProduct}}
+                                      <div class="clearfix"></div>
+                                      <span style="color: #888888">
+                                        {{this.parent_id.name}}: {{this.name}}
+                                      </span>
+                                      {{/each}}
+                                  </td>
+                                  <td style="width:200px;text-align:center">
+                                    <form method="post" action="/update-item-cart/{{this.item._id}}" enctype="application/x-www-form-urlencoded">
+                                      <input type="hidden" name="_csrf" class="tokens_update_cart" class="form-control" value="{{ csrfToken }}">
+                                      <input name="id" class="hidden" value="{{this.item._id}}">
+                                      <div class="input-group">
+                                        <input type="number" name="qty" value="{{this.qty}}" min="1" class="form-control" aria-label="Amount (to the nearest dollar)" required>
+                                        <span class="input-group-addon" style="background:#e02595;border:0px;">
+                                          <button type="submit" style="background:none;border:0px;color:#ffffff">
+                                          <i class="fa fa-upload" aria-hidden="true"></i>
+                                          </button>
+                                        </span>
+                                      </div>
+                                    </form>
+                                  </td>
+                                  <td>
+                                    {{#if_eq this.priceQty 0}}
+                                      Liên  hệ
+                                    {{else}}
+                                      {{formatNumber this.priceQty}}<sup>đ</sup>
+                                    {{/if_eq}}
+                                  </td>
+
+                                  <td>{{formatNumber this.price}} <sup>đ<sup></td>
+                                  <td style="text-align:center;width: 80px !important;"><a href="/removeItemCart?strIdProduct={{@key}}" class="btn-xs btn-danger removeItemCart" data-idoption="{{@key}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                              </tr>
+                              {{/each}}
+
+                            </tbody>
+                            {{/if}}
+                        </table>
+                    </div>
+                </div>
+                <div class="h15"></div>
+                <div class="">
+                    <a href="/" class="btn btn-sm btn-danger"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</a>
+                </div>
+                <div class="h15"></div>
+            </div>
+            <div class="col-sm-3">
+                <div class="main_infi_total_cart clearfix">
+                    <h2 class="h2_box_info_total_cart">Thông tin chung</h2>
+                    <div class="box_info_total_cart clearfix">
+                        <div class="item_box_info_total_cart item_box_info_total_cart_ clearfix">
+                            <div class="row">
+                                <div class="col-sm-6">Tổng sản phẩm:</div>
+                                <div class="col-sm-6">{{session.cart.totalQty}}</div>
+                            </div>
+                        </div>
+                        <div class="item_box_info_total_cart item_box_info_total_cart_ clearfix">
+                            <div class="row">
+                                <div class="col-sm-6">Tổng tạm tính:</div>
+                                <div class="col-sm-6">{{formatNumber session.cart.totalPrice}}<sup>đ</sup></div>
+                            </div>
+                        </div>
+                        <div class="item_box_info_total_cart item_box_info_total_cart_ clearfix">
+                            <div class="row">
+                                <div class="col-sm-6">Vận chuyển: </div>
+                                <div class="col-sm-6">
+
+                                    {{#if_eq infoShip.priceShip 0}}
+                                    <span class="money_vanchuyen">
+                                    0 VNĐ
+                                    </span>
+                                    {{else}}
+                                        <span class="money_vanchuyen">
+                                            {{formatNumber infoShip.priceShip}}<sup>đ</sup>
+                                        </span>
+                                        <span class="time_vanchuyen" style="font-size: 12px;">
+                                            ({{infoShip.timeShip}})
+                                        </span>
+                                    {{/if_eq}}
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="item_box_info_total_cart clearfix">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>Tổng tiền:</strong></div>
+                                <div class="col-sm-6" style="color: #ff0000">{{formatNumber session.cart.totalPrice}}<sup>đ</sup></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="item_box_info_total_cart clearfix">
+                          <div class="row">
+                            {{#if_eq checkAddress 1}}
+                              <div class="col-sm-8">
+                                <a href="/checkout-cart" class="btn btn-sm btn-success">Tiếp tục</a>
+                              </div>
+                            {{else}}
+                              <div class="col-sm-8">
+                                <button type="button" data-toggle="modal" data-target="#modalAddress" class="btn btn-sm btn-success">
+                                  Tiếp tục
+                                </button>
+                              </div>
+                            {{/if_eq}}
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="col-sm-12">
+                Không có sản phẩm trong giỏ hàng!
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</main>
+<!-- Modal -->
+<div id="modalAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><strong>Địa chỉ nhận hàng</strong></h4>
+      </div>
+      <form action="/saveAddressCustomer" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="modal-body">
+            <input type="hidden" name="_csrf" class="form-control" value="{{ csrfToken }}">
+            <div class="form-group">
+                <label for="provinceCustomer">
+                  Quốc gia
+                </label>
+                <select name="country" class="form-control" onChange="changeCountry()" id="countryCustomer" required>
+                  <option value="">Quốc gia</option>
+                  {{#each country}}
+                  <option value="{{this.id}}">{{this.name}}</option>
+                  {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="provinceCustomer">
+                  Tỉnh/Thành
+                </label>
+                <select name="province" class="form-control" onChange="changeProvince()" id="provinceCustomer" required>
+                    <option value="">Tỉnh/Thành</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district">Quận/Huyện</label>
+                <select name="district" id="districtCustomer"  onChange="changeDistrict()" class="form-control" required>
+                    <option value="">Quận/Huyện</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="wardsCustomer">Xã/Phường</label>
+                <select name="wards" id="wardsCustomer" class="form-control" required>
+                    <option value="">Xã/Phường</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="house">Số nhà</label>
+                <input type="text" value="" name="house" placeholder="Số nhà" class="form-control" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-info">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

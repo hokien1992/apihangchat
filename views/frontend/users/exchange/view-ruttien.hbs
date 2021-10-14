@@ -1,0 +1,134 @@
+
+{{#contentFor 'pageStyles'}}
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+<style>
+  .reload_captcah:hover{cursor: pointer}
+  .reload_captcah{display: inline-block;line-height: 40px;}
+  .reload_captcah i{font-size: 20px;color: #89276a}
+</style>
+{{/contentFor}}
+{{#contentFor 'pageScripts'}}
+<script src="/template/js/myJs/users/users.js"></script>
+<script type="text/javascript">
+  showCaptcha()
+  $('.reload_captcah').click(function(){
+    showCaptcha()
+  })
+</script>
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Gửi yêu cầu rút tiền</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Gửi yêu cầu rút tiền</a>
+              </h4>
+            </div>
+            <div class="box_user_right clearfix">
+              <div class="col-sm-12">
+                {{# if success}}
+                  <div class="alert alert-success">
+                      {{success}}
+                  </div>
+                {{/if}}
+                {{# if errors}}
+                  <div class="alert alert-danger">
+                      {{# each errors }}
+                      {{this}} <br>
+                      {{/each}}
+                  </div>
+                {{/if}}
+                <form action="/users/exchange/addruttien" method="post">
+                  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="number_monney">Số tiền:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" min="0" name="number_monney" placeholder="Nhập số tiền muốn rút">
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="hinhthucthanhtoan">Hình thức chuyển tiền:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input type="radio" name="hinhthucthanhtoan" value="0" checked>
+                          <span>Tiền mặt</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="radio" name="hinhthucthanhtoan" value="1" class="form-contorl">
+                          <span>Chuyển khoản</span>
+                        </div>
+                      </div>
+                      <div class="h15"></div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select class="form-control taikhoan" name="taikhoan">
+                            <option value="">Chọn tài khoản</option>
+                            <option value="0">Ngân hàng Vietcombank</option>
+                            <option value="1">Ngân hàng Agribank</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" name="sotaikhoan" placeholder="Nhập số tài khoản ngân hàng" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="content">Ghi chú:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <textarea name="content" class="form-control" placeholder="Ghi chú" cols="3"></textarea>
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="content"> </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <input type="text" name="captcha" class="form-control" placeholder="Nhập mã captcha" require>
+                        </div>
+                        <div class="col-sm-5">
+                          <span id="captcha"></span>
+                        </div>
+                        <div class="col-sm-3">
+                          <span class="reload_captcah"><i class="fa fa-repeat" aria-hidden="true"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn-sm btn-success">Gửi yêu cầu</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

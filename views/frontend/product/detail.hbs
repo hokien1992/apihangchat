@@ -1,0 +1,361 @@
+<main class="site-main">
+  <div class="columns container">
+      <!-- Block  Breadcrumb-->
+      <ol class="breadcrumb no-hide">
+          <li><a href="" title="{{settings.name}}">Trang chủ</a></li>
+          {{#each htmlBreakcrum}}
+          <li><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></li>
+          {{/each}}
+          <li><a href="{{itemcatproduct.slug}}" title="{{itemcatproduct.name}}">{{itemcatproduct.name}}</a></li>
+      </ol><!-- Block  Breadcrumb-->
+      <div class="row">
+          <!-- Left colunm -->
+          <div class="column col-xs-12 col-sm-3 hidden-xs" id="left_column">
+              <!-- block best sellers -->
+              <div class="block left-module">
+                  <p class="title_block">{{styleProductHome.name}}</p>
+                  <div class="block_content">
+                      <ul class="products-block best-sell">
+                          {{#if listProductStype}}
+                          {{#each listProductStype}}
+                          <li>
+                              <div class="products-block-left">
+                                  <a href="{{this.slug}}" title="{{this.name}}">
+                                      <img src="{{this.imageNumber.path}}" alt="{{this.name}}">
+                                  </a>
+                              </div>
+                              <div class="products-block-right">
+                                  <p class="product-name">
+                                      <a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a>
+                                  </p>
+                                  {{#if_eq this.price_sale 0}}
+                                  <p class="product-price">{{formatNumber this.price}}<sup>đ</sup></p>
+                                  {{else}}
+                                  <p class="product-price">{{formatNumber this.price_sale}}<sup>đ</sup></p>
+                                  {{/if_eq}}
+                                  <p class="product-star">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-o"></i>
+                                  </p>
+                              </div>
+                          </li>
+                          {{/each}}
+                          {{/if}}
+                      </ul>
+                  </div>
+              </div>
+              <!-- ./block best sellers  -->
+
+          </div>
+          <!-- ./left colunm -->
+          <!-- Main Content -->
+          <div class="col-md-9 col-main">
+              <div class="row">
+
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+
+                      <div class="product-media media-horizontal">
+
+                          <div class="image_preview_container images-large">
+
+                              <img id="img_zoom" data-zoom-image="{{gallerys.0.path}}" src="{{gallerys.0.path}}" alt="{{itemproduct.name}}">
+
+                              <button class="btn-zoom open_qv"><span>zoom</span></button>
+
+                          </div>
+
+                          <div class="product_preview images-small">
+
+                              <div class="owl-carousel thumbnails_carousel" id="thumbnails"  data-nav="true" data-dots="false" data-margin="10" data-responsive='{"0":{"items":3},"480":{"items":4},"600":{"items":5},"768":{"items":3}}'>
+                                  {{#each gallerys}}
+                                  <a href="#" data-image="{{this.path}}" data-zoom-image="{{this.path}}" title="{{itemproduct.name}}">
+
+                                      <img src="{{this.path}}" data-large-image="{{this.path}}" alt="{{itemproduct.name}}">
+
+                                  </a>
+                                  {{/each}}
+                              </div><!--/ .owl-carousel-->
+
+                          </div><!--/ .product_preview-->
+
+                      </div><!-- image product -->
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+
+                      <div class="product-info-main">
+
+                          <h1 class="page-title">
+                              {{itemproduct.name}}
+                          </h1>
+                          <div class="product-reviews-summary hidden">
+                              <div class="rating-summary">
+                                  <div class="rating-result" title="70%">
+                                      <span style="width:70%">
+                                          <span><span>70</span>% of <span>100</span></span>
+                                      </span>
+                                  </div>
+                              </div>
+                              <div class="reviews-actions">
+                                  <a href="" class="action view">Based  on 3 ratings</a>
+                                  <a href="" class="action add"><img alt="img" src="/template/images/icon/write.png">&nbsp;&nbsp;write a review</a>
+                              </div>
+                          </div>
+
+                          <div class="product-info-price">
+                              <div class="price-box">
+                                  {{#if_eq itemproduct.price_sale 0}}
+                                    <span class="price">
+                                      {{formatNumber itemproduct.price}}<sup>đ</sup>
+                                    </span>
+                                  {{else}}
+                                    <span class="price">
+                                      {{formatNumber itemproduct.price_sale}}<sup>đ</sup>
+                                    </span>
+                                    <span class="old-price">
+                                      {{formatNumber itemproduct.price}}<sup>đ</sup>
+                                    </span>
+                                  {{/if_eq}}
+                                  <span class="number_epay">
+                                    {{ itemproduct.epay }} epay
+                                  </span>
+                                  {{#if itemproduct.percent}}
+                                      <span class="label-sale">Giảm -{{itemproduct.percent}}%</span>
+                                  {{/if}}
+                              </div>
+                          </div>
+                          <div class="product-code">
+                              Mã sản phẩm: {{itemproduct.code}}
+                          </div>
+                          <div class="product-info-stock">
+                              <div class="stock available">
+                                  <span class="label">Tình trạng: </span>Còn hàng
+                              </div>
+                          </div>
+                          <div class="product-condition">
+                              Trạng thái: Mới
+                          </div>
+                          <div class="product-overview">
+                              <div class="overview-content">
+                                  {{{itemproduct.description}}}
+                              </div>
+                          </div>
+
+                          <div class="product-add-form">
+                              <p>
+                                <strong>Thuộc tính sản phẩm:</strong>
+                              </p>
+                              <input type="text" name="tracking" value="{{tracking}}" class="hidden">
+                              <div class="product-options-wrapper">
+                                <p class="hidden" id="uidProduct" data-id="{{itemproduct._id}}">
+                                </p>
+                                <div class="swatch-opt">
+                                  {{#each itemproduct.option_product}}
+                                    <div class="swatch-attribute color" data-id="">
+                                        <span class="swatch-attribute-label">
+                                          <strong>{{this.name}}:</strong>
+                                        </span>
+                                        <div class="swatch-attribute-options clearfix">
+                                          {{#each this.arrChild}}
+                                            <div class="swatch-option color" data-id="{{this._id}}" style="background-color: #ffffff;padding: 5px;">
+                                              {{this.name}}
+                                            </div>
+                                          {{/each}}
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                                <div class="form-qty">
+                                    <label class="label" style="width: 60px"><strong>Số lượng: </strong></label>
+                                    <div class="control">
+                                        <input name="productId" id="productId" value="{{itemproduct._id}}" class="hidden">
+                                        <input type="number" name="qty" class="input-qty" value="1" min="1" max="1000" step="1"/>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="product-options-bottom clearfix">
+                                <div class="actions">
+                                  <button type="button" id="addToCart" class="action btn-cart">
+                                      <span>Đặt hàng</span>
+                                  </button>
+                                  <div class="product-addto-links">
+                                    <a href="#" class="action btn-wishlist" title="Wish List">
+                                      <span>Yêu thích</span>
+                                    </a>
+                                    <a href="#" class="action btn-compare" title="Compare">
+                                      <span>So sánh</span>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="product-addto-links-second">
+                              <a href="" class="action action-print">In</a>
+                              <a href="" class="action action-friend">Chia sẻ</a>
+                          </div>
+                          {{!-- <div class="share">
+                              <img src="/template/images/media/index1/share.png" alt="share">
+                          </div> --}}
+                      </div><!-- detail- product -->
+
+                  </div><!-- Main detail -->
+
+              </div>
+
+              <!-- product tab info -->
+
+              <div class="product-info-detailed ">
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-pills" role="tablist">
+                      <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">Chi tiết sản phẩm</a></li>
+
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="description">
+                          <div class="block-title">Chi tiết sản phẩm</div>
+                          <div class="block-content">
+                              {{{itemproduct.detail}}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- product tab info -->
+
+              <!-- Block deals of -->
+              <div class="">
+                  <div class="block-deals-of-opt2">
+                      <div class="block-title ">
+                          <span class="title">Sản phẩm liên quan</span>
+                      </div>
+                      <div class="block-content">
+                          <div class="owl-carousel"
+                              data-nav="true"
+                              data-dots="false"
+                              data-margin="8"
+                              data-responsive='{
+                              "0":{"items":1},
+                              "480":{"items":2},
+                              "640":{"items":3},
+                              "992":{"items":3},
+                              "1200":{"items":3}
+                              }'>
+                              {{#each dataAllProductRelate}}
+                              <div class="product-item product-item-opt-2">
+                                  <div class="product-item-info">
+                                      <div class="product-item-photo">
+                                          <a class="product-item-img" href="{{this.slug}}" title="{{this.name}}">
+                                              <img alt="{{this.name}}" src="{{this.imageNumber.path}}">
+                                          </a>
+                                          <div class="product-item-actions">
+                                              <a class="btn btn-wishlist" href=""><span>wishlist</span></a>
+                                              <a class="btn btn-compare" href=""><span>compare</span></a>
+                                              <a class="btn btn-quickview" href="{{this.slug}}"><span>Xem nhanh</span></a>
+                                          </div>
+                                          <a href="{{this.slug}}" class="btn btn-cart"><span>Chi tiết</span></a>
+                                      </div>
+                                      <div class="product-item-detail">
+                                          <strong class="product-item-name">
+                                              <a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a>
+                                          </strong>
+                                          <div class="clearfix">
+                                              <div class="product-item-price">
+                                                {{#if_eq this.price 0}}
+                                                  <span class="price">Liên hệ</span>
+                                                {{else}}
+                                                  {{#if_eq this.price_sale 0}}
+                                                      <span class="price">{{formatNumber this.price}} <sup>đ<sup></span>
+                                                      <span class="epay" style="color: green;font-size: 12px;font-weight: 300;">{{formatNumber this.epay}} <sup>epay<sup></span>
+                                                  {{else}}
+                                                      <span class="price">{{formatNumber this.price_sale}} <sup>đ<sup></span>
+                                                      <span class="old-price">{{formatNumber this.price}} <sup>đ<sup></span>
+                                                      <span class="epay" style="color: green;font-size: 12px;font-weight: 300;">{{formatNumber this.epay}} <sup>epay<sup></span>
+                                                  {{/if_eq}}
+                                                {{/if_eq}}
+                                              </div>
+                                              <div class="product-reviews-summary hidden">
+                                                  <div class="rating-summary">
+                                                      <div title="80%" class="rating-result">
+                                                          <span style="width:80%">
+                                                              <span><span>80</span>% of <span>100</span></span>
+                                                          </span>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              {{/each}}
+                          </div>
+
+                      </div>
+                  </div>
+              </div> <!-- Block deals of -->
+          </div><!-- Main Content -->
+      </div>
+  </div>
+</main>
+
+
+<!-- Modal -->
+<div id="modalAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md modal-primary">
+
+    <!-- Modal content-->
+    <div class="modal-content modal-primary">
+      <div class="modal-header modal-primary">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Thêm ở đây hoặc bạn có thể thêm vào thông tin thành viên</h4>
+      </div>
+      <form action="/saveAddressCustomer" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="modal-body">
+            <input type="hidden" name="_csrf" class="form-control" value="{{ csrfToken }}">
+            <div class="form-group">
+                <label for="provinceCustomer">
+                  Quốc gia
+                </label>
+                <select name="country" class="form-control" onChange="changeCountry()" id="countryCustomer" required>
+                  <option value="">Quốc gia</option>
+                  {{#each country}}
+                  <option value="{{this.id}}">{{this.name}}</option>
+                  {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="provinceCustomer">
+                  Tỉnh/Thành
+                </label>
+                <select name="province" class="form-control" onChange="changeProvince()" id="provinceCustomer" required>
+                    <option value="">Tỉnh/Thành</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district">Quận/Huyện</label>
+                <select name="district" id="districtCustomer"  onChange="changeDistrict()" class="form-control" required>
+                    <option value="">Quận/Huyện</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="wardsCustomer">Xã/Phường</label>
+                <select name="wards" id="wardsCustomer" class="form-control" required>
+                    <option value="">Xã/Phường</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="house">Số nhà</label>
+                <input type="text" value="" name="house" placeholder="Số nhà" class="form-control" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-info">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

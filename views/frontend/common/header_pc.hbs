@@ -1,0 +1,363 @@
+<!-- HEADER -->
+<header class="site-header header-opt-2 cate-show none-xs">
+    <!-- header-top -->
+    <div class="header-top">
+        <div class="container">
+            <!-- hotline -->
+            <ul class=" nav-left" >
+                <li ><span><i class="fa fa-phone" aria-hidden="true"></i>{{settings.phone}}</span></li>
+                <li ><span><i class="fa fa-envelope" aria-hidden="true"></i> {{settings.email}}</span></li>
+            </ul><!-- hotline -->
+
+            <!-- heder links -->
+            <ul class="nav-right hidden-xs">
+                {{#if login}}
+                <li class="dropdown setting">
+                    <a data-toggle="dropdown" role="button" href="#" class="dropdown-toggle "><span>Tài khoản</span> <i aria-hidden="true" class="fa fa-angle-down"></i></a>
+                    <div class="dropdown-menu">
+                        {{#if login}}
+                        <ul class="account">
+                            <li><a href="/users/profile"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản của tôi</a></li>
+                            <li><a href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Thoát</a></li>
+                        </ul>
+                        {{/if}}
+                    </div>
+                </li>
+                {{ else }}
+                <li><a href="/users/signup" >Đăng ký</a></li>
+                <li><a href="/users/signin">Đăng nhập</a></li>
+                <li>
+                  <a href="/users/auth/facebook" class="btn-primary" style="padding-left: 8px;padding-right: 8px;color: #ffffff">
+                    <i class="fa fa-facebook" aria-hidden="true"></i> Đăng nhập facebook
+                  </a>
+                </li>
+                {{/if}}
+            </ul><!-- heder links -->
+
+        </div>
+    </div> <!-- header-top -->
+
+    <!-- header-content -->
+    <div class="header-content">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-xs-5 col-sm-3 col-md-3 nav-left">
+                    <!-- logo -->
+                    <strong class="logo">
+                        <a href=""><img src={{settings.logo.path}} alt={{settings.name}}></a>
+                    </strong><!-- logo -->
+                </div>
+
+
+
+                <div class=" nav-right">
+
+                    <!-- link  wishlish-->
+                    <a href="" class="link-compare"><span>compare</span></a>
+                    <!-- link  wishlish-->
+
+                    <!-- link  wishlish-->
+                    <a href="" class="link-wishlist"><span>wishlish</span></a>
+                    <!-- link  wishlish-->
+
+                    <!-- block mini cart -->
+                    <div class="block-minicart dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <span class="cart-icon"></span>
+                            <span class="cart-text">cart</span>
+                            {{#if session.cart}}
+                            <span class="counter qty">
+                                <span class="counter-number">{{session.cart.totalQty}}</span>
+                                <span class="counter-label">{{session.cart.totalQty}} <span>Sản phẩm</span></span>
+                                <span class="counter-price">{{session.cart.totalPrice}}</span>
+                            </span>
+                            {{/if}}
+                        </a>
+                        <div class="dropdown-menu">
+                            <form>
+                                <div  class="minicart-content-wrapper" >
+                                    <div class="subtitle">
+                                        Bạn có <span class="counter-number red">{{session.cart.totalQty}}</span> sản phẩm trong giỏ hàng !
+                                    </div>
+                                    <div class="minicart-items-wrapper">
+                                        <ol class="minicart-items">
+                                            {{#if session.cart}}
+                                            {{#each session.cart.items}}
+                                            <li class="product-item">
+                                                <a class="product-item-photo" href="#" title="The Name Product">
+                                                    <img class="product-image-photo" src="{{this.item.imagePath}}" alt="The Name Product">
+                                                </a>
+                                                <div class="product-item-details">
+                                                    <strong class="product-item-name">
+                                                        <a href="{{this.item.slug}}" title="{{this.item.name}}">{{this.item.name}}</a>
+                                                    </strong>
+                                                    <div class="product-item-price">
+                                                        <span class="price">{{formatNumber this.item.price}}<sup>đ</sup></span>
+                                                    </div>
+                                                    <div class="product-item-qty">
+                                                        <span class="label">Số lượng: </span ><span class="number">{{this.qty}}</span>
+                                                    </div>
+                                                    <div class="product-item-actions">
+                                                        <a class="action delete" href="/removeItemCart?strIdProduct={{@key}}" title="Remove item">
+                                                            <span>Xoá</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            {{/each}}
+                                            {{/if}}
+                                        </ol>
+                                    </div>
+                                    <div class="subtotal">
+                                        {{#if session.cart}}
+                                        <span class="label">Tổng tiền</span>
+                                        <span class="price">{{formatNumber session.cart.totalPrice}}<sup>đ</sup></span>
+                                        {{else}}
+                                        Hiện chưa có sản phẩm nào trong giỏ hàng!
+                                        {{/if}}
+                                    </div>
+                                    <div class="actions">
+                                        <!-- <a class="btn btn-viewcart" href="">
+                                            <span>Shopping bag</span>
+                                        </a> -->
+                                        <a href="/gio-hang" class="btn btn-checkout" title="Giỏi hàng">
+                                            <span>Giỏ hàng</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- block mini cart -->
+
+
+                </div>
+
+                <div class=" nav-mind">
+
+                    <!-- block search -->
+                    <div class="block-search">
+                        <div class="block-title">
+                            <span>Tìm kiếm</span>
+                        </div>
+                        <div class="block-content">
+                          <form method="get" action="/search">
+                            <div class="form-search">
+                              <div class="box-group">
+                                  <input type="text" name="name" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
+                                  <button class="btn btn-search" type="submit"><span>Tìm kiếm</span></button>
+                              </div>
+                            </div>
+                            <div class="categori-search  ">
+                                <select data-placeholder="Tất cả danh mục" class="categori-search-option">
+                                    <option>Tất cả danh mục</option>
+                                    {{# each catproducts}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                          </form>
+                        </div>
+                    </div><!-- block search -->
+
+                </div>
+            </div>
+
+        </div>
+    </div><!-- header-content -->
+
+    <div class="  header-nav mid-header">
+        <div class="container">
+            <div class="box-header-nav">
+
+                <span data-action="toggle-nav-cat" class="nav-toggle-menu nav-toggle-cat"><span>Danh mục</span><i aria-hidden="true" class="fa fa-bars"></i></span>
+
+                <!-- categori -->
+                <div class="block-nav-categori">
+
+                    <div class="block-title">
+                      <span class="visble-xs visible-sm">&nbsp;</span>
+                        <span class="hiddenxs hidden-sm">Danh mục</span>
+                    </div>
+
+                    <div class="block-content">
+                        <div class="clearfix"><span data-action="close-cat" class="close-cate"><span>Danh mục</span></span></div>
+                        <ul class="ui-categori">
+                          {{#each catproducts_sidebar }}
+                            <li class="parent">
+                              <a href="{{this.slug}}" title="{{this.name}}">
+                                  <span class="icon cd">
+                                    {{#if_eq this.iconPath ""}}
+
+                                    {{else}}
+                                    <img src="{{this.iconPath}}" alt="{{this.name}}">
+                                    {{/if_eq}}
+                                  </span>
+                                  {{this.name}}
+                              </a>
+                                <span class="toggle-submenu"></span>
+                                <div class="submenu" style="background-image: url(template/images/media/index1/bgmenu.jpg);">
+                                  {{#each this.parent}}
+                                  <ul class="categori-list clearfix">
+                                      {{#each this}}
+                                      <li class="col-sm-3">
+                                          <strong class="title"><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></strong>
+                                          <ul>
+                                              {{#each this.parent}}
+                                              <li><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></li>
+                                              {{/each}}
+                                          </ul>
+                                      </li>
+                                      {{/each}}
+                                  </ul>
+                                  {{/each}}
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+
+                        <div class="view-all-categori">
+                            <a  class="open-cate btn-view-all">Tất cả danh mục</a>
+                        </div>
+                    </div>
+
+                </div><!-- categori -->
+
+                <!-- menu -->
+                <div class="block-nav-menu">
+                    <div class="clearfix"><span data-action="close-nav" class="close-nav"><span>Đóng</span></span></div>
+                    <ul class="ui-menu">
+                        {{# each menu }}
+                        {{#if this.childs }}
+                        <li class="parent parent-submenu">
+                            {{else}}
+                            <li>
+                            {{/if}}
+                            {{#if this.checkLink }}
+                            <a href="{{this.link}}" target="_blank" title="{{this.name}}">{{this.name}} </a>
+                            {{else}}
+                            <a href="{{this.url}}" title="{{this.name}}">{{this.name}} </a>
+                            {{/if}}
+                            {{# if this.children }}
+                            <span class="toggle-submenu"></span>
+                            <div class="submenu drop-menu">
+                                <ul >
+                                  {{#each this.children }}
+                                  <li>
+                                    {{#if this.checkLink }}
+
+                                    <a href="{{this.link}}" target="_blank" title="{{this.name}}">{{this.name}} </a>
+                                    {{else}}
+                                    <a href="{{this.url}}" title="{{this.name}}">{{this.name}} </a>
+                                    {{/if}}
+                                  </li>
+                                  {{/each}}
+                                </ul>
+                            </div>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+
+                </div><!-- menu -->
+
+                <span data-action="toggle-nav" class="nav-toggle-menu"><span>Menu</span><i aria-hidden="true" class="fa fa-bars"></i></span>
+
+                <div class="block-minicart dropdown ">
+                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <span class="cart-icon"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <form>
+                            <div  class="minicart-content-wrapper" >
+                                <div class="subtitle">
+                                    Bạn có <span class="red">{{session.cart.totalQty}}</span> sản phẩm trong giỏ hàng !
+                                </div>
+                                <div class="minicart-items-wrapper">
+                                    <ol class="minicart-items">
+                                        {{#if session.cart}}
+                                        {{#each session.cart.items}}
+                                        <li class="product-item">
+                                            <a class="product-item-photo" href="#" title="The Name Product">
+                                                <img class="product-image-photo" src="template/images/media/index1/minicart.jpg" alt="The Name Product">
+                                            </a>
+                                            <div class="product-item-details">
+                                                <strong class="product-item-name">
+                                                    <a href="{{this.item.slug}}" title="{{this.item.name}}">{{this.item.name}}</a>
+                                                </strong>
+                                                <div class="product-item-price">
+                                                    <span class="price">{{formatNumber this.item.price}}<sup>đ</sup></span>
+                                                </div>
+                                                <div class="product-item-qty">
+                                                    <span class="label">Số lượng: </span ><span class="number">{{this.qty}}</span>
+                                                </div>
+                                                {{!-- <div class="product-item-actions">
+                                                    <a class="action delete" href="#" title="Remove item">
+                                                        <span>Xoá</span>
+                                                    </a>
+                                                </div> --}}
+                                            </div>
+                                        </li>
+                                        {{/each}}
+                                        {{/if}}
+                                    </ol>
+                                </div>
+                                <div class="subtotal">
+                                    {{#if session.cart}}
+                                    <span class="label">Tổng tiền</span>
+                                    <span class="price">{{formatNumber session.cart.totalPrice}}<sup>đ</sup></span>
+                                    {{else}}
+                                    Hiện chưa có sản phẩm nào trong giỏ hàng!
+                                    {{/if}}
+                                </div>
+                                <div class="actions">
+                                    <!-- <a class="btn btn-viewcart" href="">
+                                        <span>Shopping bag</span>
+                                    </a> -->
+                                    <a href="/gio-hang" class="btn btn-checkout" title="Giỏi hàng">
+                                        <span>Giỏ hàng</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="block-search">
+                    <div class="block-title">
+                        <span>Search</span>
+                    </div>
+                    <div class="block-content">
+                        <div class="form-search">
+                            <form method="get" action="/search">
+                                <div class="box-group">
+                                    <input type="text" name="name" class="form-control" placeholder="Nhập từ khoá tìm kiếm">
+                                    <button class="btn btn-search" type="submit"><span>Tìm kiếm</span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown setting">
+                    <a data-toggle="dropdown" role="button" href="#" class="dropdown-toggle "><span>Tài khoản</span> <i aria-hidden="true" class="fa fa-user"></i></a>
+                    <div class="dropdown-menu  ">
+                      {{#if login}}
+                      <ul class="account">
+                          <li><a href="/users/profile"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản của tôi</a></li>
+                          <li><a href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Thoát</a></li>
+                      </ul>
+                      {{ else }}
+                      <ul class="account">
+                          <li><a href="/users/signup"><i class="fa fa-user-plus" aria-hidden="true"></i> Đăng ký</a></li>
+                          <li><a href="/users/signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</a></li>
+                      </ul>
+                      {{/if}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header><!-- end HEADER -->

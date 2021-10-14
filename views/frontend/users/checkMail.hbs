@@ -1,0 +1,51 @@
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Gửi xác nhận email</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-4 col-sm-offset-4">
+              <div class="content_form_login clearfix">
+                <div class="text-center">
+                    <h4>{{ title }}</h4>
+                </div>
+                {{# if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{# each messages }}
+                        {{this}} <br>
+                        {{/each}}
+                    </div>
+                {{/if}}
+                {{#if_eq message_register.status 1}}
+                <div class="alert alert-success">
+                    Bạn tạo thành công tài khoản. Bạn vui lòng check email để kích hoạt tài khoản !
+                </div>
+                {{/if_eq}}
+                <form action="/users/sendLinkForgetPassword" method="post">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control" placeholder="Xác nhận email" required>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-sm btn-success">Gửi xác nhận</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>
+{{#contentFor 'pageScripts'}}
+<input type="text" name="urlRoot" id="urlRoot" value="{{urlRoot}}">
+<script src="template/js/myJs/users/users.js"></script>
+{{/contentFor}}

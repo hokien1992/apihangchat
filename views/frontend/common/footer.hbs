@@ -1,0 +1,118 @@
+<!-- FOOTER -->
+<footer class="site-footer footer-opt-1">
+    <div class="container">
+        <div class="footer-column">
+            <div class="row">
+                <div class="col-md-3 col-lg-3 col-xs-6 col">
+                    <strong class="logo-footer">
+                        <a href="" title="{{settings.name}}"><img src="{{settings.logo.path}}" alt="{{settings.name}}"></a>
+                    </strong>
+                    <table class="address">
+                        <tr>
+                            <td><b>Địa chỉ:  </b></td>
+                            <td>{{settings.address}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Phone: </b></td>
+                            <td>{{settings.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email:</b></td>
+                            <td>{{settings.email}}</td>
+                        </tr>
+                    </table>
+                </div>
+                {{#each datamenuBottom }}
+                <div class="col-md-2 col-lg-2 col-xs-6 col">
+                    <div class="links">
+                    <h3 class="title">{{this.name}}</h3>
+                    {{#if this.children }}
+                    <ul>
+                        {{#each this.children }}
+                        <li><a href="{{this.url}}" title="{{this.name}}">{{this.name}}</a></li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+                <div class="col-md-3 col-lg-3 col-xs-6 col">
+                    <div class="block-newletter">
+                        <div class="block-title">Nhận thư miễn phí</div>
+                        <div class="block-content">
+                          <form>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email của bạn">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-subcribe" type="button"><span>Gửi</span></button>
+                                </span>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                    <div class="block-social">
+                        <div class="block-title">Mạng xã hội</div>
+                        <div class="block-content">
+                            <a href="" class="sh-facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="" class="sh-pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                            <a href="" class="sh-vk"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                            <a href="" class="sh-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="" class="sh-google"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{#each datamenupartner }}
+        <div class="payment-methods">
+            <div class="block-title">
+              {{this.name}}
+            </div>
+            {{#if this.children }}
+            <div class="block-content">
+              {{#each this.children }}
+              {{#if_eq this.imagePath ''}}
+              {{else}}
+                <img alt="payment" src="{{this.imagePath}}">
+                {{/if_eq}}
+              {{/each}}
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+        <div class="footer-links">
+            {{#each datamenuBottom1}}
+            <ul class="links">
+                <li><strong class="title">{{this.name}}:</strong></li>
+                {{#if this.children }}
+                {{#each this.children }}
+                <li><a href="{{this.url}}" title="{{this.name}}">
+                    <img alt="{{this.name}}" src="{{this.imagePath}}" />
+                </a></li>
+                {{/each}}
+                {{/if}}
+            </ul>
+            {{/each}}
+        </div>
+
+        <div class="footer-bottom">
+            <div class="links">
+                <ul>
+                  {{#each datamenuBottom2}}
+                    <li>
+                      <a href="{{this.url}}" title="{{this.name}}">{{this.name}}</a>
+                    </li>
+                  {{/each}}
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            Copyright © 2018 Weon. All Rights Reserved. Designed by <a href="http://weon.vn/">weon.vn</a>
+        </div>
+    </div>
+</footer><!-- end FOOTER -->
+<!--back-to-top  -->
+<a href="#" class="back-to-top">
+    <i aria-hidden="true" class="fa fa-angle-up"></i>
+</a>

@@ -1,0 +1,294 @@
+
+{{#contentFor 'pageStyles'}}
+<link rel="stylesheet" type="text/css" href="template/css/myCss/product/select2.min.css">
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+<style>
+  .box_form_product .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li>a{
+    color: #ffffff;
+    font-weight: 700;
+    background-color: #bf1f2e;
+  }
+  .box_form_product .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+    color: #333333;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .box_form_product .nav-pills>li>a:hover, .nav-pills>li>a:focus{
+    background-color: transparent;
+    color: #333333;
+  }
+  .form_tab_product{border: 1px solid #cccccc;padding: 10px;}
+  .box_form_product .nav-pills{margin: 0px;display: inline-block;}
+  .box_form_product .select2-container--default .select2-selection--single{
+    border: 1px solid #ececec;
+    color: #888888;
+    min-height: 34px !important;
+  }
+  .box_form_product .select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 34px;
+  }
+  .button_submit{display: inline-block;float: right;}
+  #div_show_image img{width: 100%;height: auto;}
+</style>
+{{/contentFor}}
+{{#contentFor 'pageScripts'}}
+<script src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="template/js/myJs/product/select2.full.min.js"></script>
+<script type="text/javascript" src="template/js/myJs/product/product.js"></script>
+<script>
+CKEDITOR.replace( 'description', {
+      // Define the toolbar groups as it is a more accessible solution.
+      toolbarGroups: [{
+          "name": "basicstyles",
+          "groups": ["basicstyles"]
+        },
+        {
+          "name": "links",
+          "groups": ["links"]
+        },
+        {
+          "name": "paragraph",
+          "groups": ["list", "blocks"]
+        },
+        {
+          "name": "document",
+          "groups": ["mode"]
+        },
+        {
+          "name": "styles",
+          "groups": ["styles"]
+        },
+        {
+          "name": "about",
+          "groups": ["about"]
+        }
+      ],
+      // Remove the redundant buttons from toolbar groups defined above.
+      removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+    } )
+  CKEDITOR.replace( 'detail' )
+  $(document).ready(function() { $("#e1").select2() })
+  $(document).ready(function() { $("#category_id").select2() })
+  $(document).ready(function() {
+    $('.limitCat').select2({
+      placeholder: 'Chọn danh mục liên quan'
+    });
+  });
+  $(document).ready(function() {
+    $('.style_ids').select2({
+      placeholder: 'Loại sản phẩm'
+    });
+  });
+  // Hiển thị ảnh trươc khi up load
+  function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#div_show_image').html('<img src="'+e.target.result+'" />');
+      //<img id="blah" src="#" alt="your image" />
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
+  //style_ids
+</script>
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Danh sách sản phẩm</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4 style="float: left"><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Danh sách sản phẩm</a>
+
+              </h4>
+            </div>
+            <div class="box_user_right">
+              <div class="box_form_product clearfix">
+                <form action="/users/product/storeProduct" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                  <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#tabchung">Chung</a></li>
+                    <li><a data-toggle="pill" href="#tabdulieu">Dữ liệu</a></li>
+                    <li><a data-toggle="pill" href="#tabimage">Ảnh</a></li>
+                  </ul>
+                  <button type="submit" class="btn btn-md btn-success button_submit">Lưu</button>
+                  <div class="tab-content">
+                    <div id="tabchung" class="tab-pane fade in active">
+                      <div class="form_tab_product clearfix">
+                        <div class="form-group">
+                          <label for="name">
+                            <strong style="color: #888888">Tên sản phẩm:
+                              <span style="color: #ff0000">(*)</span>
+                            </strong>
+                          </label>
+                          <input type="text" name="name" class="form-control" value="" placeholder="Tên sản phẩm" >
+                        </div>
+                        <div class="form-group">
+                          <label for="name">
+                            <strong style="color: #888888">
+                              Mô tả sản phẩm:
+                            </strong>
+                          </label>
+                          <textarea name="description" class="form-control description" id="description" placeholder="Mô tả sản phẩm"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">
+                            <strong style="color: #888888">Chi tiết sản phẩm:
+                            </strong>
+                          </label>
+                          <textarea name="detail" class="form-control detail" id="detail" placeholder="Chi tiết sản phẩm"></textarea>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                          <label for="title_seo">
+                            <strong style="color: #888888">Tiêu đề seo:
+                            </strong>
+                          </label>
+                          <input type="text" name="title_seo" class="form-control" placeholder="Tiêu đề seo" >
+                        </div>
+                        <div class="form-group">
+                          <label for="description_seo">
+                            <strong style="color: #888888">Mô tả seo:</strong>
+                          </label>
+                          <textarea name="description_seo" class="form-control" id="description_seo" placeholder="Mô tả seo"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="keyword_seo">
+                            <strong style="color: #888888">Từ khoá seo:
+                            </strong>
+                          </label>
+                          <textarea name="keyword_seo" class="form-control" id="keyword_seo" placeholder="Từ khoá seo"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="tabdulieu" class="tab-pane fade">
+                      <div class="form_tab_product clearfix">
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <label for="category">
+                                <strong style="color: #888888">Giá sản phẩm:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <input type="number" class="form-control" name="price" placeholder="Giá sản phẩm">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="category">
+                                <strong style="color: #888888">Giá gốc:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <input type="number" class="form-control" name="price_old" placeholder="Giá gốc">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="category">
+                                <strong style="color: #888888">Giá khuyến mại:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <input type="number" class="form-control" name="price_sale" placeholder="Giá khuyến mại">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <label for="category">
+                                <strong style="color: #888888">Số lượng:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <input type="number" class="form-control" name="count" placeholder="Số lượng">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="code">
+                                <strong style="color: #888888">Mã sản phẩm:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <input type="text" class="form-control" name="code" placeholder="Mã sản phẩm">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="category">
+                                <strong style="color: #888888">Danh mục chính:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <select class="form-control" name="category_id" id="category_id">
+                                <option value="">Chọn danh mục chính</option>
+                                {{#each dataCatproduct}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <label for="category">
+                                <strong style="color: #888888">Danh mục liên quan:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <select class="form-control limitCat" name="limitCat" id="limitCat" multiple="multiple">
+                                {{#each dataCatproduct}}
+                                <option value="{{this._id}}">{{this.breakcrum_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="category">
+                                <strong style="color: #888888">Loại sản phẩm:
+                                  <span style="color: #ff0000">(*)</span>
+                                </strong>
+                              </label>
+                              <select class="form-control style_ids" name="style_ids" id="style_ids" multiple="multiple">
+                                {{#each dataStyleproduct}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="tabimage" class="tab-pane fade">
+                      <div class="form_tab_product clearfix">
+                        <div>
+                          <div class="col-sm-3">
+                            <div class="clearfix">
+                              Ảnh đại diện
+                            </div>
+                            <input type="file" id="imgInp" name="photo" >
+                            <div id="div_show_image">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

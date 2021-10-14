@@ -1,0 +1,34 @@
+<div class="modal fade" id="modal-gallery">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            {{!-- <h4 class="modal-title">Default Modal</h4> --}}
+            {{!-- <form id="uploadGallery" enctype="multipart/form-data" action="/backend/gallery/store" method="post"> --}}
+            <form id="uploadGallery" enctype="multipart/form-data" action="/backend/gallery/store" method="post">
+                <input type="number" name="checksIG" id="checksIG">
+                <input type="text" name="columsIG" id="columsIG">
+                <input type="text" name="strIDGallery" id="strIDGallery">
+                <input type="text" name="strPATHGallery" id="strPATHGallery">
+                <button class="btn btn-sm btn-success button_file_upload">
+                    <input type="file" name="file_gallery" id="file_gallery">
+                    <i class="fa fa-upload" aria-hidden="true"></i> Tải ảnh
+                </button>
+            </form>
+            </div>
+            <div class="modal-body clearfix">
+                <div id="list_galley">
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick=selectImage()>Cập nhật</button>
+            </div>
+        </div>
+    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

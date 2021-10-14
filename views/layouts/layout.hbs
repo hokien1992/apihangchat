@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <title>{{title}}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://localhost:3012">
+  <meta name="keywords" content="{{title}}" />
+  {{#if description_seo}}
+  <meta name="description" content="{{description_seo}}"/>
+  {{else}}
+  <meta name="description" content="{{settings.slogan}}"/>
+  {{/if}}
+  <meta property="og:site_name" content="{{title}}"/>
+  <meta property="og:rich_attachment" content="true" />
+  <meta property="article:publisher" content="text"/>
+  <meta property="og:type" content="website" />
+  {{#if urlCurrent}}
+  <meta property="og:url" content="{{urlCurrent}}"/>
+  {{else}}
+  <meta property="og:url" content="{{urlRoot}}"/>
+  {{/if}}
+  {{#if image_seo}}
+  <meta property="og:image" content="{{image_seo}}" />
+  {{else}}
+  <meta property="og:image" content="{{urlRoot}}{{settings.logo.path}}" />
+  {{/if}}
+  <meta property="og:image:width" content="200" />
+  <meta property="og:image:height" content="300" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{title}}" />
+  <link rel="shortcut icon" href="{{settings.favicon.path}}" type="image/x-icon">
+  <!-- Style CSS -->
+  <link rel="stylesheet" type="text/css" href="template/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="template/css/style.css">
+  <link rel="stylesheet" type="text/css" href="template/css/myCss/cart.css">
+  {{{block "pageStyles"}}}
+</head>
+<body class="cms-index-index {{classBody}}">
+    <div class="wrapper">
+        {{> frontend/common/header }}
+        {{{body}}}
+        {{> frontend/common/footer }}
+    </div>
+
+    <input type="text" class="hidden" name="urlRoot" value="{{urlRoot}}" id="urlRoot">
+    <!-- jQuery -->
+    <script type="text/javascript" src="template/js/jquery.min.js"></script>
+    <!-- sticky -->
+    <script type="text/javascript" src="template/js/jquery.sticky.js"></script>
+    <!-- OWL CAROUSEL Slider -->
+    <script type="text/javascript" src="template/js/owl.carousel.min.js"></script>
+    <!-- Boostrap -->
+    <script type="text/javascript" src="template/js/bootstrap.min.js"></script>
+    <!-- Countdown -->
+    <script type="text/javascript" src="template/js/jquery.countdown.min.js"></script>
+    <!--jquery Bxslider  -->
+    <script type="text/javascript" src="template/js/jquery.bxslider.min.js"></script>
+    <!-- actual -->
+    <script type="text/javascript" src="template/js/jquery.actual.min.js"></script>
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="template/js/jquery-ui.min.js"></script>
+    <!-- Chosen jquery-->
+    <script type="text/javascript" src="template/js/chosen.jquery.min.js"></script>
+    <!-- parallax jquery-->
+    <script type="text/javascript" src="template/js/jquery.parallax-1.1.3.js"></script>
+    <!-- elevatezoom -->
+    <script type="text/javascript" src="template/js/jquery.elevateZoom.min.js"></script>
+    <!-- fancybox -->
+    <script src="template/js/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script src="template/js/fancybox/source/helpers/jquery.fancybox-media.js"></script>
+    <script src="template/js/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+    <!-- arcticmodal -->
+    <script src="template/js/arcticmodal/jquery.arcticmodal.js"></script>
+    <!-- Main -->
+    <script type="text/javascript" src="template/js/main.js"></script>
+    {{!-- Cart --}}
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
+    <script src="/template/js/myJs/cart/cart.js"></script>
+    <!-- <script src="/template/js/myJs/cart/main.js"></script> -->
+
+    {{{block "pageScripts"}}}
+</body>
+</html>

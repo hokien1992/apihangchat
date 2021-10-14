@@ -1,0 +1,65 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+    Dashboard
+    <small>Thêm tài khoản</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Thêm tài khoản</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+    <div class="">
+        <div class="box">
+            <form action="/admin/add" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="box-header">
+                    <h3 class="box-title">Thêm tài khoản</h3>
+                    <button type="submit" class="btn btn-sm btn-success" style="float:right"><i class="fa fa-plus"></i> Thêm</button>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Tên</label>
+                            <input type="text" name="name" class="form-control" placeholder="Tên" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">E-mail</label>
+                            <input type="text" name="email" class="form-control" placeholder="E-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" name="address" class="form-control" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="image">Ảnh đại diện</label>
+                            <input type="file" name="image" id="image" placeholder="Ảnh đại diện">
+                            <p class="help-block">Upload ảnh với tỷ lệ 1:1</p>
+                            </div>
+                            <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Kích hoạt
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </form>
+        </div>
+        <!-- /.box -->
+        
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

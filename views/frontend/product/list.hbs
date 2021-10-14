@@ -1,0 +1,369 @@
+{{#contentFor 'pageScripts'}}
+<script type="text/javascript">
+  var data = $('.pagination a');
+  $.each(data, function(i, item){
+    var page = $(item).attr("href");
+    $(item).attr("href",window.location.href+page)
+  })
+</script>
+{{/contentFor}}
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="" title="{{settings.name}}">Trang chủ</a></li>
+            {{#each htmlBreakcrum}}
+            <li><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+            <li><a href="{{itemcatproduct.slug}}" title="{{itemcatproduct.name}}">{{itemcatproduct.name}}</a></li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+            <div class="col-md-9 col-md-push-3  col-main">
+                {{#if dataSlider}}
+                <!-- images categori -->
+                <div class="category-view">
+                    <div class="owl-carousel "
+                        data-nav="true"
+                        data-dots="false"
+                        data-margin="0"
+                        data-items='1'
+                        data-autoplayTimeout="700"
+                        data-autoplay="true"
+                        data-loop="true">
+                        {{#each dataSlider}}
+                        <div class="item " >
+                            <a href="#" title=""><img src="{{this.path}}" alt=""></a>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div><!-- images categori -->
+                {{/if}}
+                {{#if listCatproductChild}}
+                <!-- link categori -->
+                <ul class="category-links">
+                    <li class="current-cate"><a href="">Tất cá danh mục</a></li>
+                    {{#each listCatproductChild}}
+                    <li><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></li>
+                    {{/each}}
+                </ul><!-- link categori -->
+                {{/if}}
+                <!-- Toolbar -->
+                <div class=" toolbar-products toolbar-top">
+
+                    <h1 class="cate-title">{{itemCatproduct.name}}</h1>
+
+                </div><!-- Toolbar -->
+
+                <!-- List Products -->
+                <div class="products  products-grid boxlistproduct">
+                    <ol class="row product-items">
+                        {{#each listproduct}}
+                        <li class="col-xs-6 col-sm-4">
+                            <div class="product-item product-item-opt-2">
+                                <div class="product-item-info">
+                                    <div class="product-item-photo">
+                                        <a class="product-item-img" href="{{this.slug}}" title="{{this.name}}"><img alt="product name" src="{{this.imagePath}}"></a>
+                                        <div class="product-item-actions">
+                                            <a class="btn btn-wishlist" href=""><span>wishlist</span></a>
+                                            <a class="btn btn-compare" href=""><span>compare</span></a>
+                                            <a class="btn btn-quickview" href=""><span>Chi tiết</span></a>
+                                        </div>
+                                        <a href="javascript:void(0)" data-uid="{{this._id}}" class="btn btn-cart"><span>Thêm giỏ hàng</span></a>
+                                    </div>
+                                    <div class="product-item-detail">
+                                        <strong class="product-item-name"><a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a></strong>
+                                        <div class="clearfix">
+                                            <div class="product-item-price">
+                                                {{#if_eq this.price 0}}
+                                                    <span class="price">Liên hệ</span>
+                                                  {{else}}
+                                                    {{#if_eq this.price_sale 0}}
+                                                        <span class="price">{{formatNumber this.price}} <sup>đ<sup></span>
+                                                        <span class="epay" style="color: green;font-size: 12px;font-weight: 300;">{{formatNumber this.epay}} <sup>epay<sup></span>
+                                                    {{else}}
+                                                        <span class="price">{{formatNumber this.price_sale}} <sup>đ<sup></span>
+                                                        <span class="old-price">{{formatNumber this.price}} <sup>đ<sup></span>
+                                                        <span class="epay" style="color: green;font-size: 12px;font-weight: 300;">{{formatNumber this.epay}} <sup>epay<sup></span>
+                                                    {{/if_eq}}
+                                                  {{/if_eq}}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ol><!-- list product -->
+                    <ul class="pagination">
+                      {{#paginate pagination type="previous"}}
+                        <li {{#if disabled}}class="disabled"{{/if}}><a href="{{@itemCatproduct.slug}}?page={{n}}" >Prev</a></li>
+                      {{/paginate}}
+                      {{#paginate pagination type="middle" limit="3"}}
+                        <li {{#if active}}class="active"{{/if}}><a href="{{@itemCatproduct.slug}}?page={{n}}">{{n}}</a></li>
+                      {{/paginate}}
+                      {{#paginate pagination type="next"}}
+                        <li {{#if disabled}}class="disabled"{{/if}}><a href="{{@itemCatproduct.slug}}?page={{n}}">Next</a></li>
+                      {{/paginate}}
+                    </ul>
+                    <!-- {{{paginateHelper pagination}}} -->
+                </div> <!-- List Products -->
+
+            </div><!-- Main Content -->
+
+            <!-- Sidebar -->
+            <div class="col-md-3 col-md-pull-9  col-sidebar">
+              {{#if_arr_exist cat_relate 0}}
+              <!-- Block  bestseller products-->
+              <div class="block-sidebar block-sidebar-categorie">
+                  <div class="block-title">
+                      <strong>Danh mục liên quan</strong>
+                  </div>
+                  <div class="block-content">
+                      <ul class="items">
+                          {{#each cat_relate}}
+                          <li class="parent">
+                              <a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a>
+                          </li>
+                          {{/each}}
+                      </ul>
+                  </div>
+              </div><!-- Block  bestseller products-->
+              {{/if_arr_exist}}
+                <!-- Block  bestseller products-->
+                <div class="block-sidebar block-sidebar-categorie">
+                    <div class="block-title">
+                        <strong>Loại sản phẩm</strong>
+                    </div>
+                    <div class="block-content">
+                        <ul class="items">
+                            {{#each styleProduct}}
+                            <li class="parent">
+                                <a href="" title="{{this.name}}">{{this.name}}</a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div><!-- Block  bestseller products-->
+
+                <!-- block filter products -->
+                <div id="layered-filter-block" class="block-sidebar block-filter no-hide">
+                    <div class="close-filter-products"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <div class="block-title">
+                        <strong>Lọc sản phẩm</strong>
+                    </div>
+                    <div class="block-content">
+                        <!-- filter price -->
+                        <div class="filter-options-item filter-options-price">
+                            <div class="filter-options-title">Giá</div>
+                            <div class="filter-options-content clearfix">
+                              <div class="col-xs-5 col-sm-5">
+                                <div class="row">
+                                  <input type="number" name="price_first" class="form-control" placeholder="Giá tối thiểu" style="font-size: 12px">
+                                </div>
+                              </div>
+                              <div class="col-xs-2 col-sm-2">
+                                <span style="line-height: 35px;color: #888888">-</span>
+                              </div>
+                              <div class="col-xs-5 col-sm-5">
+                                <div class="row">
+                                  <input type="number" name="price_first" class="form-control" placeholder="Giá tối đa" style="font-size: 12px">
+                                </div>
+                              </div>
+                            </div>
+                        </div><!-- filter price -->
+
+                        <!-- filter brad-->
+                        <div class="filter-options-item filter-options-brand">
+                            <div class="filter-options-title">Thương hiệu</div>
+                            <div class="filter-options-content">
+                                <ol class="items">
+                                    {{#each listSupplier}}
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox" value="{{this._id}}"><span>{{this.name}} <span class="count">(20)</span>  </span>
+                                        </label>
+                                    </li>
+                                    {{/each}}
+                                </ol>
+                            </div>
+                        </div><!-- Filter Item -->
+
+                        <!-- filter color-->
+                        <div class="filter-options-item filter-options-color">
+                            <div class="filter-options-title">Màu sắc</div>
+                            <div class="filter-options-content">
+                                <ol class="items">
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #fca53c;"></span>
+                                                <span class="count">(30)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #6b5a5c;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #000000;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #3063f2;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #f9334a;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #964b00;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #faebd7;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #e84c3d;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+                                    <li class="item">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span>
+                                                <span class="img" style="background-color: #fccacd;"></span>
+                                                <span class="count">(20)</span>
+                                            </span>
+
+                                        </label>
+                                    </li>
+
+                                </ol>
+                            </div>
+                        </div><!-- Filter Item -->
+
+                        <!-- Filter Item  size-->
+                        <div class="filter-options-item filter-options-size">
+                            <div class="filter-options-title">Kích cỡ</div>
+                            <div class="filter-options-content">
+                                <ol class="items">
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>X <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>m <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>L <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>32 <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>36 <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>37 <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>X <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+                                    <li class="item ">
+                                        <label>
+                                            <input type="checkbox"><span>m <span class="count">(20)</span></span>
+                                        </label>
+                                    </li>
+
+                                </ol>
+                            </div>
+                        </div><!-- Filter Item  size-->
+
+                    </div>
+                </div><!-- Filter -->
+            </div><!-- Sidebar -->
+        </div>
+    </div>
+</main>

@@ -1,0 +1,182 @@
+
+{{#contentFor 'pageStyles'}}
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+<style>
+  .reload_captcah:hover{cursor: pointer}
+  .reload_captcah{display: inline-block;line-height: 40px;}
+  .reload_captcah i{font-size: 20px;color: #89276a}
+  #list span{
+    display: inline-block;
+    position: relative;
+    border: 1px solid #888888;
+    padding: 8px;
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  #list span button{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: #ff0000;
+    border: 0px;
+    background-color: #ffffff;
+  }
+</style>
+{{/contentFor}}
+{{#contentFor 'pageScripts'}}
+<script src="/template/js/myJs/users/users.js"></script>
+<script type="text/javascript">
+  showCaptcha()
+  $('.reload_captcah').click(function(){
+    showCaptcha()
+  })
+  $('#number_epay').change(function(){
+    var m = 0;
+    m = 4800*$(this).val()
+    var ms = m.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    $('.thanhtien').html(ms+' đ')
+  })
+  // js upload image
+  function deleteImage() {
+  	var index = Array.from(document.getElementById('list').children).indexOf(event.target.parentNode)
+    	document.querySelector("#list").removeChild( document.querySelectorAll('#list span')[index]);
+      totalFiles.splice(index, 1);
+      console.log(totalFiles)
+  }
+
+  var totalFiles = [];
+  function handleFileSelect(evt) {
+      var files = evt.target.files; // FileList object
+      //console.log(files)
+      $('#list').html('')
+      // Loop through the FileList and render image files as thumbnails.
+      for (var i = 0, f; f = files[i]; i++) {
+
+        // Only process image files.
+        if (!f.type.match('image.*')) {
+          continue;
+        }
+
+        totalFiles.push(f)
+
+        var reader = new FileReader();
+
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+          return function(e) {
+            // Render thumbnail.
+            var span = document.createElement('span');
+            span.innerHTML = ['<img width=100 class="thumb" src="', e.target.result,
+                              '" title="', escape(theFile.name), '"/>', "<button type='button' onclick='deleteImage()'>Xoá</button>"].join('');
+            //$('#list').html('')
+            document.getElementById('list').insertBefore(span, null);
+            //$('#list').html(span)
+          };
+        })(f);
+
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(f);
+      }
+    }
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Chuyển điểm</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Chuyển điểm</a>
+              </h4>
+            </div>
+            <div class="box_user_right clearfix">
+              <div class="col-sm-12">
+                {{# if success}}
+                  <div class="alert alert-success">
+                      {{success}}
+                  </div>
+                {{/if}}
+                {{# if errors}}
+                  <div class="alert alert-danger">
+                      {{# each errors }}
+                      {{this}} <br>
+                      {{/each}}
+                  </div>
+                {{/if}}
+                <form action="/users/exchange/postmove" method="post">
+                  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="number_monney">Sô Epay:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" min="0" id="number_epay" name="number_epay" placeholder="Nhập số epay chuyển">
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="username">Người nhận</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" min="0" id="username" name="username" placeholder="Nhập tài khoản người nhận">
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="content">Ghi chú:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <textarea name="content" class="form-control" placeholder="Ghi chú" cols="3"></textarea>
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="content"> </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <input type="text" name="captcha" class="form-control" placeholder="Nhập mã captcha" require>
+                        </div>
+                        <div class="col-sm-5">
+                          <span id="captcha"></span>
+                        </div>
+                        <div class="col-sm-3">
+                          <span class="reload_captcah"><i class="fa fa-repeat" aria-hidden="true"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="h15"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn-sm btn-success">Gửi yêu cầu</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

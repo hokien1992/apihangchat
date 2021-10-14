@@ -1,0 +1,172 @@
+
+{{#contentFor 'pageStyles'}}
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+<style>
+  .button_upload_image_user a{position: relative;}
+  .button_upload_image_user{text-align: center;margin-top: 10px;}
+
+  .image_user{text-align: center}
+  .image_user img{display: inline-block}
+  #fileUpload{
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+  }
+  .button_upload_image_user:hover a input#fileUpload{cursor: pointer;}
+  .image_user{width: 80px;height: 80px;border-radius: 50%;overflow: hidden;display: inline-block}
+  .box_image_user{text-align: center}
+</style>
+{{/contentFor}}
+{{#contentFor 'pageScripts'}}
+<script type="text/javascript">
+function readURL(input) {
+ if (input.files && input.files[0]) {
+     var reader = new FileReader();
+
+     reader.onload = function (e) {
+         $('#blah')
+             .attr('src', e.target.result);
+     };
+     reader.readAsDataURL(input.files[0]);
+ }
+ }
+</script>
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Thông tin cá nhân</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Thông tin cá nhân</a>
+              </h4>
+            </div>
+            <form action="/users/edit/{{dataUser._id}}" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+              <div class="box_user_right clearfix">
+                <div class="col-sm-3">
+                  <div class="box_image_user clearfix">
+                    <div class="image_user">
+                      {{#if_eq dataUser.imagePath ''}}
+                      <img src="/user/user.png" alt="{{dataUser.name}}" id="blah">
+                      {{else}}
+                      <img src="{{dataUser.imagePath}}" alt="{{dataUser.name}}" id="blah">
+                      {{/if_eq}}
+                    </div>
+                    <div class="button_upload_image_user clearfix">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-primary">
+                          <input type='file' onchange="readURL(this);" name="file" id="fileUpload"/>
+                          Tải ảnh
+                        </a>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-sm-9">
+                  <div class="info_profile clearfix">
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="name">Họ Tên: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="name" value="{{dataUser.name}}">
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="email">Email: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="email" class="form-control" name="email" value="{{dataUser.email}}">
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="phone">Điện thoại: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="phone" value="{{dataUser.phone}}">
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="gender">Giới tính: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        {{#if_eq dataUser.gender 1}}
+                        <input type="radio" name="gender" value="1" checked> Nam &nbsp; &nbsp;
+                        <input type="radio" name="gender" value="0"> Nữ
+                        {{else}}
+                        <input type="radio" name="gender" value="1"> Nam &nbsp; &nbsp;
+                        <input type="radio" name="gender" value="0" checked> Nữ
+                        {{/if_eq}}
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="username">Tài khoản: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <span>{{dataUser.username}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="username">Người thiệu: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <span>{{dataUser.introduce}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="wallet_id">Ví tiêu dùng: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <span class="green">{{formatNumber dataUser.wallet_id.w_epay}} epay</span>
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="wallet_id">Ví tiết kiệm: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <span class="green">{{formatNumber dataUser.wallet_id2.w_epay}} epay</span>
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="address">Điạ chỉ: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="address" value="{{dataUser.address}}">
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <div class="col-sm-3">
+                        <label for="address"> </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <button type="submit" class="btn btn-sm btn-primary">Cập nhật</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

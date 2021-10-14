@@ -1,0 +1,52 @@
+
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Giao dịch chuyển đổi</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Giao dịch chuyển đổi</a>
+              </h4>
+            </div>
+            <div class="box_user_right clearfix">
+              <div class="col-sm-4">
+                <div class="box_active_exchange clearfix">
+                  <p class="icon_box_active_exchange">
+                    <i class="fa fa-exchange" aria-hidden="true"></i>
+                  </p>
+                  <a href="/users/exchange/naptien">Nạp tiền vào ví</a>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="box_active_exchange clearfix">
+                  <p class="icon_box_active_exchange">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  </p>
+                  <a href="/users/exchange/move">Chuyển điểm</a>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="box_active_exchange clearfix">
+                  <p class="icon_box_active_exchange">
+                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                  </p>
+                  <a href="/users/exchange/tieudung">Lịch sử giao dịch</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

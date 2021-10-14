@@ -1,0 +1,100 @@
+
+{{#contentFor 'pageStyles'}}
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Dashboard</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Bảng điều khiển</a>
+              </h4>
+            </div>
+            <div class="box_user_right">
+              <div class="info_profile clearfix">
+                <div class="col-sm-12">
+                  <strong>Link giới thiệu đăng ký</strong>: <span>{{urlRoot}}/users/signup?id={{dataUser.username}}</span>
+                </div>
+                <div class="h15"></div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                          <i class="fa fa-money" aria-hidden="true"></i>
+                          Ví tiêu dùng
+                      </div>
+                      <div class="panel-body">
+                        {{#if_eq dataUser.wallet_id.w_epay 0}}
+                        <span class="red">{{dataUser.wallet_id.w_epay}} EPAY</span>
+                        {{else}}
+                        <span class="red">{{formatNumber dataUser.wallet_id.w_epay}} EPAY</span>
+                        {{/if_eq}}
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                          <i class="fa fa-usd" aria-hidden="true"></i>
+                          Ví tiết kiệm
+                      </div>
+                      <div class="panel-body">
+                        {{#if_eq dataUser.wallet_id.w_epay 0}}
+                        <span class="red">{{dataUser.wallet_id2.w_epay}} EPAY</span>
+                        {{else}}
+                        <span class="red">{{formatNumber dataUser.wallet_id2.w_epay}} EPAY</span>
+                        {{/if_eq}}
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-warning">
+                      <div class="panel-heading">
+                          <i class="fa fa-usd" aria-hidden="true"></i>
+                          Ví epay
+                      </div>
+                      <div class="panel-body">
+                        {{#if_eq dataUser.wallet_id.w_epay 0}}
+                        <span class="red">{{dataUser.wallet_id3.w_epay}} EPAY</span>
+                        {{else}}
+                        <span class="red">{{formatNumber dataUser.wallet_id3.w_epay}} EPAY</span>
+                        {{/if_eq}}
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-warning">
+                      <div class="panel-heading">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                          Thành viên giới thiệu
+                      </div>
+                      <div class="panel-body">
+                        <span class="red">{{countIntroduce}} Thành viên</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                          Tổng số đơn hàng
+                      </div>
+                      <div class="panel-body">
+                        <span class="red">{{countOrder}} đơn hàng</span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

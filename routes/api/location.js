@@ -1,0 +1,22 @@
+var express = require('express')
+var app = express()
+var router = express.Router()
+const locationController = require('../../controllers/api/LocationController')
+const verifyToken = require('../../Middlewares/JwtAuthMiddleware')
+//========End fix upload image
+router.get('/listDataWhere', locationController.listDataWhere)
+router.get('/list', locationController.list)
+router.get('/getAll', locationController.getAll)
+router.get('/show/:id', locationController.show)
+router.post('/store', locationController.store)
+router.post('/update/:id', locationController.update)
+router.post('/remove/:id', locationController.remove)
+router.get('/getFromVietelPost', locationController.getFromVietelPost)
+router.get('/listCountry', locationController.listCountry)
+router.get('/listProvince', locationController.listProvince)
+router.get('/listDistrict', locationController.listDistrict)
+router.get('/listWards', locationController.listWards)
+router.get('/updateProvince', locationController.updateProvince)
+router.get('/address', locationController.address)
+//getFromVietelPost
+module.exports = router

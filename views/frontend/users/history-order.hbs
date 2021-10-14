@@ -1,0 +1,130 @@
+
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Lịch sử đơn hàng</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Lịch sử đơn hàng</a>
+              </h4>
+            </div>
+            <div class="box_user_right">
+              <div class="search_product_affiliate clearfix">
+                <div class="row">
+                  <form class="" action="/users/history-order" method="get">
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label for="code">Mã đơn hàng</label>
+                        <input type="text" name="code" class="form-control" placeholder="Nhập mã đơn hàng">
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label for="datetime">Ngày đặt hàng</label>
+                        <input type="date" name="datetime" class="form-control" placeholder="Ngày đặt hàng">
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label for="code"> &nbsp</label>
+                        <div class="clearfix">
+
+                        </div>
+                        <button type="submit" class="btn-purple">Lọc đơn hàng</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="table-reponsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 12px">
+                  <thead>
+                    <tr class="active">
+                      <th>Mã đơn hàng</th>
+                      <th>Khách hàng</th>
+                      <th>Tổng tiền</th>
+                      <th>Tổng Epay</th>
+                      <th>Trạng thái</th>
+                      <th style="width: 100px">Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each listOrder}}
+                    <tr>
+                      <td>{{this.code}}</td>
+                      <td style="color: #777777">
+                        <strong>{{this.nameCustomer}}</strong>
+                      </td>
+                      <td>
+                        <span class="green price">
+                          <strong>
+                            {{formatNumber this.totalPrice}}<sup>đ</sup>
+                          </strong>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="green price">
+                          <strong>
+                            {{formatNumber this.totalEpay}}<sup>epay</sup>
+                          </strong>
+                        </span>
+                      </td>
+                      <td>
+                        {{#if_eq this.status 0}}
+                          <span class="red">Chờ duyệt</span>
+                        {{/if_eq}}
+                        {{#if_eq this.status 1}}
+                          <span class="green">Xác nhận</span>
+                        {{/if_eq}}
+                        {{#if_eq this.status 2}}
+                          <span class="green">Hoàn thành</span>
+                        {{/if_eq}}
+                        {{#if_eq this.status 3}}
+                          <span class="red">Đã duyệt</span>
+                        {{/if_eq}}
+                        {{#if_eq this.status 4}}
+                          <span class="green">Hoàn thành</span>
+                        {{/if_eq}}
+                        {{#if_eq this.status 5}}
+                          <span class="red">Huỷ đơn hàng</span>
+                        {{/if_eq}}
+                      </td>
+                      <td style="text-align: center">
+                        <a href="/users/view-order/{{this._id}}" target="_blank" class="btn-sm btn-success">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+                <ul class="pagination">
+                  {{#paginate pagination type="previous"}}
+                    <li {{#if disabled}}class="disabled"{{/if}}><a href="/users/affiliate-tracking?page={{n}}" >Prev</a></li>
+                  {{/paginate}}
+                  {{#paginate pagination type="middle" limit="3"}}
+                    <li {{#if active}}class="active"{{/if}}><a href="/users/affiliate-tracking?page={{n}}">{{n}}</a></li>
+                  {{/paginate}}
+                  {{#paginate pagination type="next"}}
+                    <li {{#if disabled}}class="disabled"{{/if}}><a href="/users/affiliate-tracking?page={{n}}">Next</a></li>
+                  {{/paginate}}
+                </ul>
+                <!-- {{{paginateHelper pagination}}} -->
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

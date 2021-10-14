@@ -1,0 +1,38 @@
+const express = require('express')
+const router = express.Router()
+const authController = require('../controllers/frontend/AuthController')
+const passport = require('passport')
+router.get('/checkToken', authController.checkToken)
+router.post('/login', authController.loginAttempt)
+router.post('/loginUser', authController.loginAttemptUser)
+// Login facebook
+router.get('/', function(req, res){
+  res.render('index', { user: req.user });
+});
+
+router.get('/login', function(req, res){
+	  //Return to page login
+});
+
+router.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
+
+router.get('/auth/facebook', passport.authenticate('facebook',{scope:['email']}));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect : '/', failureRedirect: '/users/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+module.exports = router
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/users/login')
+}

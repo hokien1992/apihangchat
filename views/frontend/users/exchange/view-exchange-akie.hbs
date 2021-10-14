@@ -1,0 +1,43 @@
+
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Nạp tiền vào ví</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Nạp tiền vào ví</a>
+              </h4>
+            </div>
+            <div class="box_user_right clearfix">
+              <div class="col-sm-8">
+                <form class="" action="" method="post">
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="price">Số tiền chuyển</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" name="price" value="" placeholder="Nhập số tiền chuyển">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-sm-4">
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

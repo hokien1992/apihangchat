@@ -1,0 +1,130 @@
+
+{{#contentFor "pagesCss"}}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/gallery/gallery.css">
+{{/contentFor}}
+
+{{#contentFor "pagesStyle"}}
+
+{{/contentFor}}
+
+{{#contentFor "pageScripts"}}
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="/gallery/gallery.js"></script>
+{{/contentFor}}
+{{#contentFor "pageJs"}}
+  <!-- page script -->
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+{{/contentFor}}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+    Dashboard
+    <small>Thêm tài khoản</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Thêm tài khoản</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+    <div class="">
+        <div class="box">
+            <form action="/backend/product/store" method="post" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <div class="box-header">
+                    <h3 class="box-title">Thêm tài khoản</h3>
+                    <button type="submit" class="btn btn-sm btn-success" style="float:right">
+                        <i class="fa fa-plus"></i> Thêm
+                    </button>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a data-toggle="tab" href="#home"><strong>Chung</strong></a></li>
+                      <li><a data-toggle="tab" href="#menu1"><strong>Thống số</strong></a></li>
+                      <li><a data-toggle="tab" href="#menu2"><strong>Ảnh</strong></a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div id="home" class="tab-pane fade in active">
+                        <div class="h15"></div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tên sản phẩm</label>
+                                <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Mô tả sản phẩm</label>
+                                <textarea name="" id="" class="form-control" placeholder="Mô tả sản phẩm" rows="3"></textarea>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="name">Tiêu đề seo</label>
+                                <input type="text" name="title_seo" class="form-control" placeholder="Tiêu đề seo">
+                            </div>
+                            <div class="form-group">
+                                <label for="description_seo">Mô tả seo</label>
+                                <textarea name="description_seo" id="description_seo"  placeholder="Mô tả seo" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="keyword_seo">Từ khóa seo</label>
+                                <textarea name="keyword_seo" id="keyword_seo" class="form-control" placeholder="Từ khóa seo" rows="3"></textarea>
+                            </div>
+                        </div>
+                      </div>
+                      <div id="menu1" class="tab-pane fade">
+                        <div class="h15"></div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                              <label for="price">Giá sản phẩm</label>
+                              <input type="number" name="price" class="form-control" placeholder="Giá sản phẩm">
+                            </div>
+                            <div class="form-group">
+                              <label for="price_old">Giá gốc</label>
+                              <input type="number" name="price_old" class="form-control" placeholder="Giá gốc">
+                            </div>
+                            <div class="form-group">
+                                <label for="category_id">Danh mục sản phẩm</label>
+                                <select name="category_id" class="form-control" id="category_id" required>
+                                  <option value="">Danh mục sản phẩm</option>
+                                  <option value="0">Máy tính</option>
+                                  <option value="0">Thời trang</option>
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+                      <div id="menu2" class="tab-pane fade">
+                          <div class="form-group">
+                              <label for="image">Ảnh đại diện</label>
+                              <div class="clearfix"></div>
+                              <input type="text" id="imageNumber" name="imageNumber">
+                              <input type="text" id="imagePath" name="imagePath">
+                              <div class="showImageUpload imagePath clearfix" >
+                                  <a class="btn btn-sm btn-primary select_image" onclick=showModalGallery('imageNumber',0) data-colum="imageNumber" limit="0">Chọn ảnh</a>
+                                  <div class="show_imageNumber">
+                                      <div class="in_showImageUpload">
+                                          <div class="divShowImageUpload imageNumber">
+                                              <img src="/adminator/images/user_default.jpg" alt="">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </form>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+{{> 'backend/managerGallery/modalGallery' }}

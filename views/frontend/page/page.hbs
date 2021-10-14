@@ -1,0 +1,55 @@
+<!-- MAIN -->
+    <main class="site-main">
+
+        <div class="columns container">
+            <!-- Block  Breadcrumb-->
+
+            <ol class="breadcrumb no-hide">
+                <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+                <li class="active">{{itemproduct.name}}</li>
+            </ol><!-- Block  Breadcrumb-->
+
+            <div class="row">
+
+                <!-- Main Content -->
+                <div class="col-md-9 col-md-push-3   col-main">
+                    <h2 class="page-heading">
+                        <span class="page-heading-title2">{{itemproduct.name}}</span>
+                    </h2>
+
+                    <div class="content-text clearfix">
+
+                        {{{itemproduct.detail}}}
+
+                    </div>
+
+                </div><!-- Main Content -->
+
+                <!-- Sidebar -->
+                <div class="col-md-3 col-md-pull-9   col-sidebar">
+
+                    <!-- Block  bestseller products-->
+                    <div class="block-sidebar block-sidebar-categorie">
+                        <div class="block-title">
+                            <strong>Bài viết quan tâm</strong>
+                        </div>
+                        <div class="block-content">
+                            <ul class="items">
+                              {{#each listPage}}
+                                <li class="parent">
+                                    <a href="{{this.slug}}" title="{{this.name}}">{{this.name}}</a>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div><!-- Block  bestseller products-->
+
+
+                </div><!-- Sidebar -->
+
+
+            </div>
+        </div>
+
+
+    </main><!-- end MAIN -->

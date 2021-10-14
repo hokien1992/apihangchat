@@ -1,0 +1,76 @@
+
+{{#contentFor 'pageStyles'}}
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="template/css/myCss/users.css">
+<style>
+  .viewListOrder p{margin: 0px;}
+  .viewListOrder h5{color: #145696}
+  .viewListOrder{padding: 10px 0px;border-top: 1px solid #f6f6f6}
+</style>
+
+{{/contentFor}}
+<!-- MAIN -->
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.namecompany}}">Trang chủ </a></li>
+            <li class="active">Chi tiết đơn hàng</li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          {{> frontend/users/sidebar }}
+          <div class="col-sm-9">
+            <div class="title_box_user_right_all clearfix">
+              <h4><i class="fa fa-list" aria-hidden="true"></i>
+                <a href="javascript:void(0)">Chi tiết đơn hàng</a>
+              </h4>
+            </div>
+            <div class="box_user_right">
+              <div class="col-sm-12">
+                <div class="person_producer">
+                  <strong>Người thiệu: </strong>{{itemOrder.user_id_o.name}}
+                </div>
+                <div class="h15"></div>
+                <div class="person_producer">
+                  <strong>Người đặt hàng: </strong>{{itemOrder.nameCustomer}}
+                </div>
+              </div>
+              <div class="h15"></div>
+              <div class="listProduct clearfix">
+                <div class="itemProductOrder clearfix">
+                  {{#each itemOrder.items}}
+                  <div class="viewListOrder clearfix">
+                    <div class="col-sm-2">
+                      <div style="width: 80px;height: 80px;text-align: center">
+                        <img src="{{this.[1].item.imagePath}}" alt="{{this.[1].item.name}}" style="max-width: 100%;height: auto;display: inline-block;">
+                      </div>
+                    </div>
+                    <h5><strong>{{this.[1].item.name}}</strong></h5>
+
+
+
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <p style="color: #888888">Số lượng: <span>{{this.[1].qty}}</span></p>
+                        <p style="color: #888888">Đơn giá: <span class="red">{{formatNumber this.[1].priceQty}} VNĐ</span> </p>
+                        <p style="color: #888888">Thành tiền: <span class="red">{{formatNumber this.[1].price}} VNĐ</span> </p>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        {{#each this.[1].dataOptionProduct}}
+                        <p style="color: #888888">{{this.parent_id.name}}: <span>{{this.name}}</span> </p>
+                        {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</main><!-- end MAIN -->
+<div class="h15"></div>

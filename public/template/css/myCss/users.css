@@ -1,0 +1,61 @@
+/* Cột trái */
+.box_user_left{background: #ffffff;box-shadow: 0px 0px 2px #cccccc;padding: 10px;}
+.content_box_img{
+  text-align: center;
+}
+.box_img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+}
+.box_img img {
+  max-height: 100px;
+}
+
+.box_img h3{font-size: 20px;}
+/* Cột phải */
+.box_user_right{background: #ffffff;box-shadow: 0px 0px 2px #cccccc;padding: 10px;}
+.box_user_option{
+  box-shadow: 0px 0px 2px #cccccc;
+}
+.box_user_left_all h4 a{margin:0px;color:#ffffff;font-weight: bold;text-transform: uppercase;font-size: 14px;}
+.box_user_left_all h4{padding: 10px;margin: 0px;color: #ffffff;}
+.title_box_user_left_all{background: #145696;}
+.title_box_user_left_all h4{font-size: 14px;}
+.box_user_option ul li a{
+  display: block;
+  color: #888888;
+}
+.box_user_option ul li{padding: 10px;border-bottom: 1px solid #cccccc;background: #ffffff;}
+.box_user_option ul li:hover{background: #145696}
+.box_user_option ul li:hover a{color: #ffffff}
+.title_box_user_right_all h4,.title_box_user_right_all h4 a{color: #ffffff;text-transform: uppercase;font-size:14px;font-weight: 700}
+.title_box_user_right_all{padding-left: 10px;}
+.title_box_user_right_all{background: #145696;}
+.btn-purple{background: 145696;color:#ffffff;padding: 7px 10px;text-align: center;border:0px}
+.btn-red{background: #145696;color:#ffffff;padding: 7px 10px;text-align: center;border:0px}
+/* .box_user_left ul li{} */
+.itemUserCommission{background: #145696;border-radius: 10px;text-align: center;padding: 10px}
+.itemUserCommission h4{font-size: 14px;color: #ffffff;margin-bottom: 10px}
+.itemUserCommission p{font-size: 13px;color: #ffffff;}
+/* .box_signup{background: #ffffff;} */
+.box_signup input, .box_signup select, .box_signup textarea{color: #777777;font-size: 13px;background: #eeeeee;border: 0px;}
+.box_signup label{font-size: 14px;color: #333333;float: right}
+.content_form_login{background: #ffffff;box-shadow: 0px 0px 1px #cccccc;padding: 15px;}
+.content_form_login h2{margin-top: 0px;}
+.box_active_exchange{border:1px solid #cccccc;line-height: 60px;background: #145696;border-radius: 20px;overflow: hidden}
+.icon_box_active_exchange{width: 60px;text-align: center;height:60px;margin: 0px;float:left;background: #013669;color: #ffffff;margin-right: 10px;}
+.box_active_exchange a, .box_active_exchange i{font-size: 14px;color: #ffffff;}
+.box_active_exchange a:hover{color: #cccccc}
+.box_active_exchange i{font-size: 20px;color: #ffffff;}
+@media(max-width: 991px){
+  .box_signup label {
+    font-size: 14px;
+    color: #333333;
+    float: left;
+  }
+  .box_user_option{height: 0;overflow: hidden}
+  .box_user_option.open_title_box_user_left_all{height: auto;}
+}

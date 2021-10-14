@@ -1,0 +1,130 @@
+<main class="site-main">
+    <div class="columns container">
+        <!-- Block  Breadcrumb-->
+
+        <ol class="breadcrumb no-hide">
+            <li><a href="/" title="{{settings.name}}">Trang chủ</a></li>
+            <li><a href="/gio-hang" title="Giỏ hàng">Hoàn thành đặt hàng</a></li>
+        </ol><!-- Block  Breadcrumb-->
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <div class="box_form_checkout clearfix">
+              <h2 class="h2_box_info_total_cart">Xác nhận đơn hàng!</h2>
+              <div class="info_form_cart_customer clearfix">
+                <div class="notify_order">
+                  <div class="alert alert-sm alert-success">
+                    Cảm ơn quý khách đã đặt hàng. Chúng tôi sẽ sớm liên hệ với quý khách!
+                  </div>
+                </div>
+                <div class="">
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Họ Tên: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span>{{itemOrder.nameCustomer}}</span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Email: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span>{{itemOrder.emailCustomer}}</span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Điện thoại: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span>{{itemOrder.phoneCustomer}}</span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Địa chỉ nhận hàng: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span>{{itemOrder.addressCustomer}}</span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Tổng sản phẩm: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span  class="red">{{itemOrder.totalQty}}</span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Giá trị đơn hàng: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span class="red">
+                        {{formatNumber itemOrder.totalPrice}}<sup class="red">đ</sup>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Tiền ship: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span class="red">
+                        {{formatNumber itemOrder.totalPriceShip}}
+                        <sup class="red">đ</sup>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Tổng Epay: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span class="red">{{formatNumber itemOrder.totalEpay}}<sup class="red">epay</sup></span>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <div class="col-sm-3">
+                      <label for="nameCustomer">
+                        <strong>Tổng tiền: </strong>
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <span class="red">{{formatNumber itemOrder.totalOrder}}<sup class="red">đ</sup></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="h15"></div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"admepay_vnpay.tags"},{"v":1,"unique":true,"key":{"label":1},"name":"label_1","ns":"admepay_vnpay.tags","background":true}]}
